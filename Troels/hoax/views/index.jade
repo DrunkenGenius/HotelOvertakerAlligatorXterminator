@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+    p 
+      h2 Situation 
+      div#status ...
+    hr
+    b What do you want to do?(search/kill/quit)
+    br
+    input(type="text" id="userInput")
+    button(type="button", id="enterBtn") Enter
+    div#highscores #{data}
