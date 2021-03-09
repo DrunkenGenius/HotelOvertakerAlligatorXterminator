@@ -4,21 +4,11 @@ class enemyClass {
     constructor() {
         this.enemyName = this.nameGenerator();
         this.enemyDamage = this.damageGenerator();
-        this.enemyfood = this.foodMaker();
-        this.loot = this.weaponMaker();
+        this.enemyfood = [new foodClass()];
+        this.loot = [new weaponClass()];
     }
 
-    weaponMaker() {
-        let weapon = 'weapon' + 'ID' + this.getRandomInt(99999);
-        weapon = new weaponClass();
-        return weapon
-    }
-
-    foodMaker() {
-        let food = 'food' + 'ID' + this.getRandomInt(99999);
-        food = new foodClass();
-        return food;
-    }
+ 
 
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
