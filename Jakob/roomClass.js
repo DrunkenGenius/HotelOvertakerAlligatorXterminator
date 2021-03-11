@@ -2,19 +2,10 @@ class roomClass {
 
 
     constructor() {
-        //this.name = this.nameGenerator();
-        //this.weapons = this.weaponMaker();
-        this.enemies = [new enemyMaker()];
+        this.enemies = [new enemyClass()];
     }
 
-    /*weaponMaker() {
-        let weapon = 'weapon'+'ID'+this.getRandomInt(99999);
-        weapon = new weaponClass();
-        return weapon
-    }*/
-
-   
-
+ 
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
