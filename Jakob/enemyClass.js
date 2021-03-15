@@ -2,13 +2,17 @@ class enemyClass {
 
 
     constructor() {
+        this.level = this.enemyLevel();
         this.enemyName = this.nameGenerator();
         this.enemyDamage = this.damageGenerator();
         this.enemyfood = [new foodClass()];
         this.loot = [new weaponClass()];
     }
 
- 
+    enemyLevel(){
+        let level = this.getRandomInt(15);
+        return level;
+    }
 
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
