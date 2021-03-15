@@ -2,7 +2,9 @@ class roomClass {
 
 
     constructor() {
+        this.nameGenerator = this.nameGenerator();
         this.enemies = [new enemyClass()];
+        
     }
 
  
@@ -12,17 +14,13 @@ class roomClass {
 
     nameGenerator() {
 
-        let roomName = ['Hall', 'Diner', '']
+        let roomName = ['Hall', 'Diner', 'Livingroom', 'Kitchen','Closet',' Master Bedroom',
+        'Under The Bed','Staffs Office','Sir Peters Room'];
 
         let name = roomName[this.getRandomInt(roomName.length)];
         return name;
     }
 
-    damageGenerator() {
-        let damage = Math.round(this.name.length / 3);
-        return damage;
-    }
+
 
 }
-let room = new roomClass();
-console.log(room);

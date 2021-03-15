@@ -51,6 +51,3 @@ class playerClass {
 
   
 }
-
-let player = new playerClass();
-console.log(player);
