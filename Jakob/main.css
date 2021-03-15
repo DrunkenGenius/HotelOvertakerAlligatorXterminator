@@ -6,6 +6,10 @@
 
 body {
     font: 13px Helvetica, Arial;
+    background-color: black;
+    background-image: url(/Billeder/Headline.png), url(/Billeder/Alligator.jpg);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
 }
 
 form {
@@ -14,20 +18,30 @@ form {
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: white;
 }
 
 form input {
     border: 0;
     padding: 10px;
-    width: 90%;
+    margin-left: 25%;
+    width: 50%;
     margin-right: .5%;
+    background-color: white;
 }
 
 form button {
+    margin-left: 45%;
     width: 9%;
     background: rgb(130, 224, 255);
     border: none;
     padding: 10px;
+    margin-bottom: 10%;
+}
+
+table{
+    color: white;
+    width: 40%;
 }
 
 #messages {
@@ -40,6 +54,7 @@ form button {
 
 #messages li {
     padding: 5px 10px;
+    color: white;
 }
 
 #messages li:nth-child(odd) {
@@ -49,4 +64,18 @@ form button {
 #itemList {
     width: 20%;
     float: right;
+    color: white;
+}
+
+#commands{
+    color: white;
+    margin-left: 36.5%;
+    margin-top: 40%;
+    z-index: 1;
+    position: relative;
+}
+#commands2{
+    font-size: 30px;
+    margin-left: 13%;
+    margin-bottom: 2%;
 }

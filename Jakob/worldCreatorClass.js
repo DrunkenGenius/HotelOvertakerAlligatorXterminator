@@ -15,12 +15,7 @@ class worldCreatorClass {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-  
 
-    damageGenerator() {
-        let damage = Math.round(this.name.length / 3);
-        return damage;
-    }
 
 }
 let thidsas = new worldCreatorClass;

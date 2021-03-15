@@ -5,16 +5,24 @@ class main {
         this.game = this.game();
     }
     
-    world(){
-        let room =  new roomClass();
-        console.log(room);
-        return room ;
-        
-    }
+    
 
     game(){
         let game
         return game;
+
+    }
+
+    inventory(){
+        let items = [];
+        return items;
+    }
+
+    addItem(theItem){
+        this.inventory.items.push(theItem);
+    }
+
+    removeItem(){
 
     }
    
