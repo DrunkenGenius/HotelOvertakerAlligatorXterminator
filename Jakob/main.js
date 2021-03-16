@@ -1,29 +1,22 @@
-class main {
 
-    constructor() {
-        this.world = [new worldCreatorClass()];
-        this.game = this.game();
-    }
+    let world = [new worldCreatorClass()];
+    let items = [];
     
-    
-
-    game(){
-        let game
-        return game;
-
-    }
-
-    inventory(){
-        let items = [];
+    function inventory(){
         return items;
     }
 
-    addItem(theItem){
-        this.inventory.items.push(theItem);
+    function addItem(theItem){
+        items.push(theItem);
     }
 
-    removeItem(){
+    function removeItem(){
 
     }
    
-} 
+ 
+let wep1 = new weaponClass;
+console.log(wep1);
+addItem(wep1);
+addItem(new foodClass);
+console.log(inventory());
