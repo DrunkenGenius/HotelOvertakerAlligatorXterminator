@@ -5,12 +5,25 @@ class enemyClass {
         this.level = this.enemyLevel();
         this.enemyName = this.nameGenerator();
         this.enemyDamage = this.damageGenerator();
-        this.enemyfood = [new foodClass()];
-        this.loot = [new weaponClass()];
+        this.loot = this.loot();
     }
 
-    enemyLevel(){
-        let level = this.getRandomInt(15);
+    loot() {
+        let foodloot = new foodClass();
+        let weaponloot;
+        if (this.getRandomInt(3) <= 1)
+            weaponloot = new weaponClass();
+        let enemyLootArray = [];
+        return enemyLootArray = [foodloot, weaponloot];
+    }
+
+    enemyLevel() {
+        let level;
+        let num = this.getRandomInt(3); 
+        if (num <= 1)
+            level = 1 //skal være playerClass.level ;
+        else if (num > 1)
+            level = this.getRandomInt(15);
         return level;
     }
 

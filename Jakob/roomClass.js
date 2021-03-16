@@ -8,9 +8,10 @@ class roomClass {
     }
 
     enemies() {
-        if (this.getRandomInt(3) == 0)
+        let num = this.getRandomInt(3);
+        if (num == 0)
             return new enemyClass();
-        else if (this.getRandomInt(3) < 2) {
+        else if (num <= 2) {
             let twoEnemies = [new enemyClass(), new enemyClass()]
             return twoEnemies;
         }
