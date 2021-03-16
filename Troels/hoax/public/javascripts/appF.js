@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 	// initial state of the game
 	let state = { hp: 100, xp: 0, score: 0 };
-
+	let name = prompt("What is your name human?");
 
 	let gameIsRunning = true;
 
@@ -22,7 +22,7 @@ $(document).ready(function () {
 	const userInput = $('#userInput');
 
 	$.ajax({
-		type: "POST",
+		type: "GET",
 		url: "http://localhost:3000/highscores",
 		dataType: "json"
 	}).done(function (data) {
@@ -31,23 +31,21 @@ $(document).ready(function () {
 
 	const setHighScores = (highscores) => {
 		highScores.html(`<h3>Highscores</h3>`)
-
-		highscores.forEach((element) => {
+		const sortedArray = highscores.sort((a, b) => (a.bestScore > b.bestScore) ? -1 : 1);
+		sortedArray.forEach((element) => {
 			console.log("gg");
 			highScores.append(`<div>User: ${element.username}       Score: ${element.bestScore}</div>`);
 		})
 	}
 
 	const quit = () => {
+		console.log(name);
 		$.ajax({
 			type: "POST",
 			url: "http://localhost:3000/highscores",
 			dataType: "json",
-			data: JSON.stringify({
-				username: "Troels",
-				bestScore: state.score
-			}
-			)
+			data: {username: name,
+				bestScore: state.score}
 		}).done(function (data) {
 			setHighScores(data);
 		});
