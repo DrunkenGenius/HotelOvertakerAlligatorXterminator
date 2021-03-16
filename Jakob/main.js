@@ -10,13 +10,17 @@
         items.push(theItem);
     }
 
-    function removeItem(){
-
+    function removeItem(theItem){
+        items.splice(theItem);
     }
    
  
 let wep1 = new weaponClass;
 console.log(wep1);
 addItem(wep1);
-addItem(new foodClass);
-console.log(inventory());
+let food1 = new foodClass;
+addItem(food1);
+console.log(items);
+removeItem(0,0);
+console.log(items);
+
