@@ -2,11 +2,12 @@ class playerClass {
 
     constructor() {
         this.name = this.nameGenerator();
-        this.hp = this.hp();
-        this.xp = this.experience();
-        this.level = this.level();
+        this.hp = 100;
+        this.xp = 0;
+        this.level = 1;
         this.weapon = [new weaponClass()];
-        this.inventory = this.inventory();
+        this.inventory = [];
+        this.location = 0
     }
 
 
@@ -29,24 +30,25 @@ class playerClass {
         return playerName;
     }
 
-    hp(){
-        let hp = 100;
-        return hp;
-    }
-
-    experience(){
-        let xp = 0;
-        return xp;
+    setexperience(exp){
+        this.xp += exp;
     }
     
-    level(){
-        let level = 1;
-        return level;
+    setlevel(lvl){
+        thislevel += lvl
     }
 
     inventory(){
         let items;
         return items;
+    }
+
+    addItem(theItem) {
+        this.inventory.push(theItem);
+    }
+    
+    removeItem(theItem) {
+        this.inventory.splice(theItem, 1);
     }
 
   
