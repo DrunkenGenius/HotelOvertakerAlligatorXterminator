@@ -1,14 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-    p 
-      h2 Situation 
-      div#status ...
+    div
+      ul#messages
+    #itemList
+    #commands
+      #commands2
+        p COMMANDS
+      table
+        tbody
+          tr
+            th LOOK
+            th ATTACK
+            th LOOT
+            th GOTO
+          tr
+    p
+    p
+    h2.text Situation
+    b.text What do you want to do? (search/kill/quit)
+    #status.text ...
+    p
     hr
-    b What do you want to do?(search/kill/quit)
     br
-    input(type="text" id="userInput")
-    button(type="button", id="enterBtn") Enter
-    div#highscores #{data}
+    form(action='')
+      input#userInput(type='text')
+      button#enterBtn(type='button') ENTER
+    p

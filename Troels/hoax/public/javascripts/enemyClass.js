@@ -1,6 +1,4 @@
 class enemyClass {
-
-
     constructor() {
         this.level = this.enemyLevel();
         this.enemyName = this.nameGenerator();
@@ -19,7 +17,7 @@ class enemyClass {
 
     enemyLevel() {
         let level;
-        let num = this.getRandomInt(3); 
+        let num = this.getRandomInt(3);
         if (num <= 1)
             level = 1 //skal være playerClass.level ;
         else if (num > 1)
