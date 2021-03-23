@@ -1,5 +1,5 @@
 let world = new worldCreatorClass();
-console.log(world.rooms[0]);
+console.log(world.rooms[0][1]);
 let player1 = new playerClass;
 //console.log(player1);
 
