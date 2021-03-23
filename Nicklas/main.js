@@ -10,10 +10,8 @@ player1.addItem(wep1);
 
 window.addEventListener('load', function () {
 
-    let state = {hp: 100, xp: 0, score: 0};
-    
     const status = document.getElementById('status');
-    status.innerHTML = 'Your status is now: ' + JSON.stringify(state);
+    status.innerHTML = `Your status.. Player hp: ${player1.hp}, xp: ${player1.xp} level ${player1.level}`;
 
     
 
@@ -21,7 +19,7 @@ window.addEventListener('load', function () {
     const userInput = document.getElementById('userInput');
 
     enterBtn.addEventListener('click', function () {
-            status.innerHTML = 'your status is now: ' + JSON.stringify(state);
+            status.innerHTML = `Your status.. Player hp: ${player1.hp}, xp: ${player1.xp} level ${player1.level}`;
 
             switch (userInput.value.toUpperCase() ){
                     case 'SEARCH': {
@@ -31,17 +29,16 @@ window.addEventListener('load', function () {
                             dice = Math.floor(Math.random() * 6) + 1;
                             if (dice == 1) {
                                 status.innerHTML += '<br/>... a rosted chicken!';
-                                state.hp += Math.floor(Math.random() * 6) + 1;
+                                player1.hp += Math.floor(Math.random() * 6) + 1;
                             }
                             if (dice == 2) {
                                 status.innerHTML += '<br/>... some coins!';
-                                state.score += Math.floor(Math.random() * 6) + 1;
-                                state.xp += Math.floor(Math.random() * 6) + 1;
+                                player1.xp += Math.floor(Math.random() * 6) + 1;
                             }
                             if (dice == 3) {
                                 status.innerHTML += '<br/>... poisonous mushroom!';
-                                state.hp -= Math.floor(Math.random() * 6) + 1;
-                                state.xp += 1;
+                                player1.hp -= Math.floor(Math.random() * 6) + 1;
+                                player1.xp += 1;
                             }
                         } else {
                             status.innerHTML += '<br/>you found nothing.';
@@ -52,9 +49,8 @@ window.addEventListener('load', function () {
                         let dice = Math.floor(Math.random() * 6) + 1;
                         if (dice <= 2) {
                             status.innerHTML += '<br/>you killed a monster!';
-                            state.hp -= Math.floor(Math.random() * 6) + 1;
-                            state.xp += Math.floor(Math.random() * 6) + 1;
-                            state.score += Math.floor(Math.random() * 2);
+                            player1.hp -= Math.floor(Math.random() * 6) + 1;
+                            player1.xp += Math.floor(Math.random() * 6) + 1;
                         } else {
                             status.innerHTML += '<br/>you tried to kill a monster... no luck!';
                         }
