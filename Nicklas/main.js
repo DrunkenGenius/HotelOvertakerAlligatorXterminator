@@ -1,4 +1,5 @@
-let world = [new worldCreatorClass()];
+let world = new worldCreatorClass();
+console.log(world.rooms[0]);
 
 let player1 = new playerClass;
 //console.log(player1);
@@ -23,7 +24,30 @@ window.addEventListener('load', function () {
 
             switch (userInput.value.toUpperCase() ){
                     case 'SEARCH': {
-                        let dice = Math.floor(Math.random() * 6) + 1;
+
+                        if (world.rooms[player1.location] == 0){
+                            status.innerHTML += 
+                            '<br/>You are in room:           ' + world.rooms[0].name + 
+                            '<br/>The room to your left is:  ' + world.rooms[2].name +
+                            '<br/>The room to your right is: ' + world.rooms[1].name;
+                            //'<br/>' + world.rooms[player1.location].enemies.length + ' hungry ememies are looking at you!';
+                        } else if (world.rooms[player1.location] == 1){
+                            status.innerHTML += 
+                            '<br/>You are in room:           ' + world.rooms[1].name + 
+                            '<br/>The room to your left is:  ' + world.rooms[0].name +
+                            '<br/>The room to your right is: ' + world.rooms[2].name;
+                        } else{
+                            status.innerHTML += 
+                            '<br/>You are in room:           ' + world.rooms[2].name + 
+                            '<br/>The room to your left is:  ' + world.rooms[1].name +
+                            '<br/>The room to your right is: ' + world.rooms[0].name;
+                        }
+                        
+                         
+
+                    }
+                    break;
+                        /* let dice = Math.floor(Math.random() * 6) + 1;
                         if (dice <= 3) {
                             status.innerHTML += '<br/>you found something...';
                             dice = Math.floor(Math.random() * 6) + 1;
@@ -44,7 +68,7 @@ window.addEventListener('load', function () {
                             status.innerHTML += '<br/>you found nothing.';
                         }
                     }
-                    break;
+                    break; */
                     case 'KILL': {
                         let dice = Math.floor(Math.random() * 6) + 1;
                         if (dice <= 2) {

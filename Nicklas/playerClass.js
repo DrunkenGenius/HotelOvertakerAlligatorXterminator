@@ -7,7 +7,7 @@ class playerClass {
         this.level = 1;
         this.weapon = [new weaponClass()];
         this.inventory = [];
-        this.location = 0
+        this.location = 0;
     }
 
 
