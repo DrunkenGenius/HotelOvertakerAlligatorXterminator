@@ -25,13 +25,13 @@ window.addEventListener('load', function () {
             switch (userInput.value.toUpperCase() ){
                     case 'SEARCH': {
 
-                        if (world.rooms[player1.location] == 0){
+                        if (player1.location == 0){
                             status.innerHTML += 
                             '<br/>You are in room:           ' + world.rooms[0].name + 
                             '<br/>The room to your left is:  ' + world.rooms[2].name +
                             '<br/>The room to your right is: ' + world.rooms[1].name;
                             //'<br/>' + world.rooms[player1.location].enemies.length + ' hungry ememies are looking at you!';
-                        } else if (world.rooms[player1.location] == 1){
+                        } else if (player1.location == 1){
                             status.innerHTML += 
                             '<br/>You are in room:           ' + world.rooms[1].name + 
                             '<br/>The room to your left is:  ' + world.rooms[0].name +
