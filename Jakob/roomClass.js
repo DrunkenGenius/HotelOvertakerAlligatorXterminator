@@ -2,7 +2,7 @@ class roomClass {
 
 
     constructor() {
-        this.nameGenerator = this.nameGenerator();
+        this.name = this.nameGenerator();
         this.enemies = this.enemies();
 
     }

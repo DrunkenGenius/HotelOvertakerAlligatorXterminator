@@ -1,5 +1,5 @@
 let world = new worldCreatorClass();
-console.log(world.rooms[0][1]);
+console.log(world.rooms);
 let player1 = new playerClass;
 //console.log(player1);
 
@@ -8,77 +8,81 @@ player1.addItem(wep1);
 
 //___________________________________________
 
-function printText(yourText){
-    for (let i = 0; i < yourText.length(); i++){
-
-    }
+function printByLetter(message) {
+    let i = 0;
+    let interval = setInterval(function () {
+        if (message.charAt(i) === "|")
+        document.getElementById('status').innerHTML += '<br/>'
+        else
+        document.getElementById('status').innerHTML += message.charAt(i);
+        i++;
+        if (i > message.length) {
+            clearInterval(interval);
+        }
+    }, 50);
 }
 
+
 window.addEventListener('load', function () {
-  
+
     const status = document.getElementById('status');
     status.innerHTML = `Your status.. Player hp: 
     ${player1.hp}, xp: ${player1.xp} level ${player1.level}`;
-   
+
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
 
     enterBtn.addEventListener('click', function () {
-            status.innerHTML = `Your status.. Player hp: 
+        status.innerHTML = `Your status.. Player hp: 
             ${player1.hp}, xp: ${player1.xp} level ${player1.level}`;
 
-            switch (userInput.value.toUpperCase() ){
-                    case 'SEARCH': {
-                        
-                    }
-                    break;
+        switch (userInput.value.toUpperCase()) {
+            case 'SEARCH': {
+                printByLetter('<br/>Hello world, bonjour le monde.');
+            }
+            break;
 
-                    case 'ATTACK 0' : {
-                        status.innerHTML += '<br/>You slowly walk towards your enemy.';
-                        let dice = Math.floor(Math.random() * 6) + 1;
-                        if (dice <= 2) {
-                            status.innerHTML += '<br/>you killed a monster!';
-                            state.hp -= Math.floor(Math.random() * 6) + 1;
-                            state.xp += Math.floor(Math.random() * 6) + 1;
-                            state.score += Math.floor(Math.random() * 2);
-                        } else {
-                            status.innerHTML += '<br/>you tried to kill a monster... no luck!';
-                        }
-                    }
-                    break;
+        case 'ATTACK 0': {
+            let enemy = world.rooms[player1.location].enemies[0];
+            console.log(enemy);
+            printByLetter(`| You slowly walk towards your enemy. | You pull out: ${player1.weapon.name} | Enemy ${enemy.enemyName} Level: ${enemy.level} `);
+            
+            /*while (player1.hp >= 0 || enemy.hp >= 0){
+                setTimeout(1000);
+                printByLetter(`${enemy.enemyName} hits you for ${enemy.enemyDamage}`);
+                player1.hp -= enemy.enemyDamage;
 
-                    case 'ATTACK 1': {
-                        let dice = Math.floor(Math.random() * 6) + 1;
-                        if (dice <= 2) {
-                            status.innerHTML += '<br/>you killed a monster!';
-                            state.hp -= Math.floor(Math.random() * 6) + 1;
-                            state.xp += Math.floor(Math.random() * 6) + 1;
-                            state.score += Math.floor(Math.random() * 2);
-                        } else {
-                            status.innerHTML += '<br/>you tried to kill a monster... no luck!';
-                        }
-                    }
-                    break;
+            }
+            
+            */
+            
+        }
+        break;
 
-                    case 'LOOT':{
+        case 'ATTACK 1': {
+            printByLetter(`You slowly walk towards your enemy. | You pull out: ${player1.weapon.name}`);
+        }
+        break;
 
-                    }
-                    break;
+        case 'LOOT': {
 
-                    case 'FLEE':{
+        }
+        break;
 
-                    }
-                    break;
+        case 'FLEE': {
 
-                    
-                    case 'GOTO':{
+        }
+        break;
 
-                    }
 
-                    default: {
-                        status.innerHTML += '<br/>...command not recognized...';
-                    }
-                }
-            });
+        case 'GOTO': {
 
+        }
+
+        default: {
+            status.innerHTML += '<br/>...command not recognized...';
+        }
+        }
     });
+
+});

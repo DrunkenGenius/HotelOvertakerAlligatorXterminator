@@ -6,6 +6,12 @@ class enemyClass {
         this.enemyName = this.nameGenerator();
         this.enemyDamage = this.damageGenerator();
         this.loot = this.loot();
+        this.hp = this.healthGenerator();
+    }
+    
+    healthGenerator(){
+        let hp = this.enemyName.length* this.level * 0.5
+        return hp;
     }
 
     loot() {
