@@ -79,3 +79,11 @@ table{
     margin-left: 13%;
     margin-bottom: 2%;
 }
+
+#status {
+	height: 150px;
+}
+
+.text{
+    color: blanchedalmond;
+}

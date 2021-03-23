@@ -24,11 +24,11 @@
     </div>
     <div id=itemList>
     </div>
-    <form action="">
-        <input id="m" autocomplete="off" /><br><br><button>Send</button>
-    </form>
+
     <div id="commands">
-        <div id="commands2"><p>COMMANDS</p></div>
+        <div id="commands2">
+            <p>COMMANDS</p>
+        </div>
         <table>
             <tr>
                 <th>LOOK</th>
@@ -39,8 +39,24 @@
             <tr></tr>
         </table>
     </div>
+    <p>
 
+		<p><h2 class="text">Situation</h2>
+            <b class="text">What do you want to do? (search/kill/quit)</b>
+		<div id="status" class="text">...</div>
+		</p>
 
-</body>
+		<hr/>	
+
+		
+		<br/>
+
+        <form action="">
+		<input type="text" id="userInput" id = "m"></input>
+		<button type="button" id="enterBtn">ENTER</button>
+        </form>
+	</p>
+
+</body> 
 
 </html>
