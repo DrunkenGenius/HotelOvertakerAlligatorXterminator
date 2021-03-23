@@ -10,22 +10,18 @@ player1.addItem(wep1);
 
 window.addEventListener('load', function () {
 
-    let player = new playerClass;
-    let hotel = new roomClass;
-
-    roomDesc = {
-        roomNameA: "RoomeA", items: ["chair", "Sword"],
-        roomNameB: "RoomeB", items: ["chair", "Sword"]
-     }
-
+    let state = {hp: 100, xp: 0, score: 0};
+    
     const status = document.getElementById('status');
-    status.innerHTML = 'Your status is now: ' + player.hp;
+    status.innerHTML = 'Your status is now: ' + JSON.stringify(state);
+
+    
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
 
     enterBtn.addEventListener('click', function () {
-            status.innerHTML = 'your status is now: ' + player.hp;
+            status.innerHTML = 'your status is now: ' + JSON.stringify(state);
 
             switch (userInput.value.toUpperCase() ){
                     case 'SEARCH': {
