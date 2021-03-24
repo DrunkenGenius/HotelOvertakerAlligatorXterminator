@@ -87,3 +87,80 @@ table{
 .text{
     color: blanchedalmond;
 }
+
+#body{
+    background-color: honeydew;
+}
+
+.container{
+    display:  grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 
+    "blanc1 search search blanc2"
+    "attack attack item item"
+    "blanc3 input input blanc4";
+    
+}
+
+#container0{
+    background-color: cadetblue;
+    grid-area: blanc1;
+}
+
+#container1{
+    background-color: chartreuse;
+    grid-area: search;
+}
+
+#container2{
+    background-color: chocolate;
+    grid-area: search;
+}
+
+#container3{
+    background-color: cyan;
+    grid-area: blanc2;
+}
+
+#container4{
+    background-color: gold;
+    grid-area: attack;
+}
+
+#container5{
+    background-color: darkgoldenrod;
+    grid-area: attack;
+}
+
+#container6{
+    background-color: darkkhaki;
+    grid-area: item;
+}
+
+#container7{
+    background-color: darksalmon;
+    grid-area: item;
+}
+
+#container8{
+    background-color: darkturquoise;
+    grid-area: blanc3;
+}
+
+#container9{
+    background-color: deeppink;
+    grid-area: input;
+}
+
+#container10{
+    background-color: firebrick;
+    grid-area: input;
+}
+
+#container11{
+    background-color: ghostwhite;
+    grid-area: blanc4;
+}
+
