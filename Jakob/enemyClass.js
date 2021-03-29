@@ -3,15 +3,15 @@ class enemyClass {
 
     constructor() {
         this.level = this.enemyLevel();
-        this.enemyName = this.nameGenerator();
-        this.enemyDamage = this.damageGenerator();
+        this.name = this.nameGenerator();
+        this.damage = this.damageGenerator();
         this.loot = this.loot();
         this.hp = this.healthGenerator();
     }
-    
-    healthGenerator(){
-        //let length = parseInt(this.enemyName.length, 10);
-        let hp = Math.round(this.enemyName.length * this.level * 1.5);
+
+    healthGenerator() {
+        //let length = parseInt(this.name.length, 10);
+        let hp = Math.round(this.name.length * this.level * 1.5);
         return hp;
     }
 
@@ -26,11 +26,11 @@ class enemyClass {
 
     enemyLevel() {
         let level;
-        let num = this.getRandomInt(3); 
+        let num = this.getRandomInt(3);
         if (num <= 1)
-            level = 1 //skal være playerClass.level ;
+            level = 1; //skal være playerClass.level ;
         else if (num > 1)
-            level = this.getRandomInt(15);
+            level = this.getRandomInt(15) + 1;
         return level;
     }
 
@@ -62,7 +62,7 @@ class enemyClass {
     }
 
     damageGenerator() {
-        let damage = Math.round(this.enemyName.length / 3);
+        let damage = Math.round(this.name.length / 3);
         return damage;
     }
 }

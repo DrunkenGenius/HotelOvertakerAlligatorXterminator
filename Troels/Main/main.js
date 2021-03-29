@@ -10,7 +10,7 @@ let isFighting = false;
 //___________________________________________
 
 function printByLetter(message) {
-    let status = document.getElementById('status');
+    let status = document.getElementById('gamePlay');
     status.innerHTML = '';
     let i = 0;
     let interval = setInterval(function () {
