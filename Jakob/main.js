@@ -85,7 +85,7 @@ window.addEventListener('load', function () {
             printByLetter(`| You slowly walk towards your enemy. | You pull out: ${player1.weapon.name} | Enemy ${enemy.enemyName} Level: ${enemy.level} `);
 
 
-            while (player1.hp >= 0 && enemy.hp && isFighting == true) {
+            while (player1.hp >= 0 && enemy.hp >= 0 && isFighting == true) {
                 console.log('Fight loop');
                 printByLetter(`${enemy.enemyName} hits you for ${enemy.enemyDamage}`);
                 player1.hp -= enemy.enemyDamage;
