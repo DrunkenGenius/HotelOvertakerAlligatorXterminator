@@ -38,18 +38,38 @@ const getEnemy = (enemyInput) => {
 
 window.addEventListener('load', function () {
 
+    const status = document.getElementById('playerStats');
+    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp}/1 `;
 
+    const items = document.getElementById('playerItems')
+    items.innerHTML = `Player Weapon Equipped: ${player1.weapon.name}`;
+    
+    //if(world.rooms[player1.location].enemies.length <= 1)
+    //{
+    const croc1 = document.getElementById('croc1');
+    croc1.innerHTML = 
+    `Croc Name: ${world.rooms[player1.location].enemies[0].enemyName} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[0].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[0].enemyDamage} </br>`;
+    //}
 
-    const status = document.getElementById('status');
-    status.innerHTML = `Your status.. Player hp: 
-    ${player1.hp}, xp: ${player1.xp} level ${player1.level}`;
+    //if(world.rooms[player1.location].enemies.length > 1)
+    //{
+    const croc2 = document.getElementById('croc2');
+    croc2.innerHTML = 
+    `Croc Name: ${world.rooms[player1.location].enemies[1].enemyName} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[1].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[1].enemyDamage} </br>`;
+    //}
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
 
     enterBtn.addEventListener('click', function () {
-        status.innerHTML = `Your status.. Player hp: 
-            ${player1.hp}, xp: ${player1.xp} level ${player1.level}`;
+        const gamePlay = document.getElementById('gamePlay');
+        gamePlay.innerHTML = `You try to ${userInput.value}: `;
 
         //Split input string
         let input = userInput.value.split(' ');
@@ -59,18 +79,18 @@ window.addEventListener('load', function () {
         switch (command.toUpperCase()) {
             case 'SEARCH': {
                 if (player1.location == 0) {
-                    status.innerHTML +=
+                    gamePlay.innerHTML +=
                         '<br/>You are in room:           ' + world.rooms[0].name +
                         '<br/>The room to your left is:  ' + world.rooms[2].name +
                         '<br/>The room to your right is: ' + world.rooms[1].name;
                     //'<br/>' + world.rooms[player1.location].enemies.length + ' hungry ememies are looking at you!';
                 } else if (player1.location == 1) {
-                    status.innerHTML +=
+                    gamePlay.innerHTML +=
                         '<br/>You are in room:           ' + world.rooms[1].name +
                         '<br/>The room to your left is:  ' + world.rooms[0].name +
                         '<br/>The room to your right is: ' + world.rooms[2].name;
                 } else {
-                    status.innerHTML +=
+                    gamePlay.innerHTML +=
                         '<br/>You are in room:           ' + world.rooms[2].name +
                         '<br/>The room to your left is:  ' + world.rooms[1].name +
                         '<br/>The room to your right is: ' + world.rooms[0].name;

@@ -4,19 +4,16 @@
     box-sizing: border-box;
 }
 
-body {
+#body {
     font: 13px Helvetica, Arial;
     background-color: black;
-    background-image: url(/Billeder/Headline.png), url(/Billeder/Alligator.jpg);
-    background-repeat: no-repeat;
-    background-position-x: 50%;
 }
 
 form {
-    background: #000;
-    padding: 3px;
+
+    padding: 0px;
     position: fixed;
-    bottom: 30%;
+    bottom: 25%;
     width: 50%;
     color: white;
 }
@@ -39,12 +36,12 @@ form button {
     margin-bottom: 10%;
 }
 
-table{
-    color: white;
+/*table{
     position: fixed;
-    width: 20%;
-    padding-top: 5%;
-}
+    padding-left: 0%;
+    width: 30%;
+    padding-top: 1%;
+}*/
 
 #messages {
     list-style-type: none;
@@ -90,79 +87,177 @@ table{
     color: blanchedalmond;
 }
 
-#body{
-    background-color: honeydew;
-}
-
 .container{
     display:  grid;
     height: 100vh;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 0.7fr 1fr 1fr 1fr;
     grid-template-areas: 
-    "blanc1 search search blanc2"
+    "headline headline headline headline"
+    "blanc1 mainInfo mainInfo blanc2"
     "blanc3 input input blanc4"
     "player player item item";
     
 }
 
-#container0{
-    background-color: cadetblue;
-    grid-area: blanc1;
+#headline{
+    grid-area: headline;
+    background-color: black;
+    background-image: url(Billeder/Headline.png);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: center;
 }
 
-#container1{
-    background-color: chartreuse;
-    grid-area: search;
+#container0{
+    text-align: center;
+    width: 100%;
+    padding-top: 5%;
+    grid-area: blanc1;
+    width: 100%;
+    height: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-image: url(Billeder/Alligator.jpg);
 }
 
 #container2{
-    background-color: chocolate;
-    grid-area: search;
+    grid-area: mainInfo;
 }
 
 #container3{
-    background-color: cyan;
+    text-align: center;
+    width: 100%;
+    padding-top: 5%;
     grid-area: blanc2;
+    width: 100%;
+    height: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-image: url(Billeder/Alligator.jpg);
 }
 
 #container4{
-    background-color: gold;
+    text-align: center;
+    width: 100%;
+    padding-top: 2%;
     grid-area: blanc3;
 }
 
-#container5{
-    background-color: darkgoldenrod;
-    grid-area: input;
-}
-
 #container6{
-    background-color: darkkhaki;
     grid-area: input;
 }
 
 #container7{
-    background-color: darksalmon;
+    text-align: center;
+    width: 100%;
+    padding-top: 2%;
     grid-area: blanc4;
 }
 
-#container8{
-    background-color: darkturquoise;
-    grid-area: player;
-}
-
 #container9{
-    background-color: deeppink;
     grid-area: player;
-}
-
-#container10{
-    background-color: firebrick;
-    grid-area: item;
 }
 
 #container11{
-    background-color: ghostwhite;
     grid-area: item;
 }
+
+
+
+.textColor{
+    color: yellow;
+}
+
+#mainInfo{
+    color: red;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: middle;
+    width: 80%;
+}
+
+/*#input{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 80%;
+}*/
+
+#heading1{
+    text-align: center;
+    padding-top: 3%;
+    font-size: 30px;
+}
+
+#text1{
+    text-align: center;
+    width: 100%;
+    padding-top: 2%;
+}
+
+#playerStatsHeading{
+    text-align: center;
+    font-size: 30px;
+    padding-left: 10%;
+    padding-top: 1%;
+}
+
+#playerItemsHeading{
+    text-align: center;
+    font-size: 30px;
+    padding-left: 10%;
+    padding-top: 1%;
+}
+
+#playerStats{
+    text-align: center;
+    font-size: 20px;
+    padding-left: 10%;
+}
+
+#playerItems{
+    text-align: center;
+    font-size: 20px;
+    padding-left: 10%;
+}
+
+#gamePlay{
+    display: inline-block; 
+    text-align: left;
+    font-size: 20px;
+}
+
+.centerText{
+    text-align: center;
+}
+
+#gamePlayHeading{
+    text-align: center;
+    padding-top: 5%;
+    font-size: 25px;
+}
+
+.CrocText{
+    text-align: center;
+    width: 100%;
+    padding-top: 2%;
+}
+
+#croc1{
+    display: inline-block; 
+    width: 100%;
+    padding-top: 2%;
+}
+
+#croc2{
+    display: inline-block; 
+    width: 100%;
+    padding-top: 2%;
+}
+
 
