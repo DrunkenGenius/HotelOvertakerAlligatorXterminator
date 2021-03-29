@@ -72,7 +72,7 @@ const findIndexByName = (string, array) => {
 window.addEventListener('load', function () {
 
     const status = document.getElementById('playerStats');
-    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} `;
+    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp}  / ${player1.levelreq} `;
 
     const items = document.getElementById('playerItems')
     items.innerHTML = `Player Weapon Equipped: ${player1.weapon.name}`;
@@ -134,9 +134,10 @@ window.addEventListener('load', function () {
                         alert('YOU LOST');
                     }
                     else if (enemy.hp <= 0) {
-                        console.log("You won");
+                        printByLetter(`${enemy.name} was defeated`);
                         player1.setexperience(enemy.xp);
-                        status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} `;
+                        player1.setXPreq(100);
+                        status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
                     }
 
 
