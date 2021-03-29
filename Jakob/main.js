@@ -140,11 +140,7 @@ window.addEventListener('load', function () {
                         player1.setXPreq(100);
                         status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
                     }
-
-
                 }
-
-
             }
                 break;
 

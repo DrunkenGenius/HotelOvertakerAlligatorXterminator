@@ -72,7 +72,7 @@ const findIndexByName = (string, array) => {
 window.addEventListener('load', function () {
 
     const status = document.getElementById('playerStats');
-    status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp}/1 `;
+    status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq}  `;
 
     const items = document.getElementById('playerItems')
     items.innerHTML = 
