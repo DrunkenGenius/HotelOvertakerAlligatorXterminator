@@ -16,7 +16,7 @@ form {
     background: #000;
     padding: 3px;
     position: fixed;
-    bottom: 30%;
+    bottom: 35%;
     width: 50%;
     color: white;
 }
@@ -42,8 +42,9 @@ form button {
 table{
     color: white;
     position: fixed;
-    width: 20%;
-    padding-top: 5%;
+    padding-left: 0%;
+    width: 50%;
+    padding-top: 1%;
 }
 
 #messages {
@@ -100,7 +101,7 @@ table{
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: 
-    "blanc1 search search blanc2"
+    "blanc1 mainInfo mainInfo blanc2"
     "blanc3 input input blanc4"
     "player player item item";
     
@@ -113,12 +114,12 @@ table{
 
 #container1{
     background-color: chartreuse;
-    grid-area: search;
+    grid-area: mainInfo;
 }
 
 #container2{
     background-color: chocolate;
-    grid-area: search;
+    grid-area: mainInfo;
 }
 
 #container3{
@@ -165,4 +166,54 @@ table{
     background-color: ghostwhite;
     grid-area: item;
 }
+
+#mainInfo{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: middle;
+    width: 80%;
+}
+
+/*#input{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 80%;
+}*/
+
+#heading1{
+    text-align: center;
+    padding-top: 3%;
+    font-size: 30px;
+}
+
+#playerStatsHeading{
+    font-size: 30px;
+    padding-left: 10%;
+    padding-top: 10%;
+}
+
+#playerItemsHeading{
+    font-size: 30px;
+    padding-left: 10%;
+    padding-top: 10%;
+}
+
+#playerStats{
+    font-size: 20px;
+    padding-left: 10%;
+}
+
+#playerItems{
+    font-size: 20px;
+    padding-left: 10%;
+}
+
+#gamePlay{
+    font-size: 20px;
+    padding-left: 10%;
+}
+
 
