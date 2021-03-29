@@ -5,10 +5,18 @@ class playerClass {
         this.hp = 100;
         this.xp = 0;
         this.level = 1;
-        this.weapon = [new weaponClass()];
+        this.weapon = new weaponClass();
         this.inventory = [];
         this.location = 0;
+        this.damage = this.damage;
+
     }
+
+    damage(){
+        let wepdmg = this.weapon.damage;
+        return wepdmg;
+    }
+ 
 
 
     getRandomInt(max) {
