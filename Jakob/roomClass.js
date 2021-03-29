@@ -25,7 +25,7 @@ class roomClass {
     nameGenerator() {
 
         let roomName = ['Hall', 'Diner', 'Livingroom', 'Kitchen', 'A Closet', ' Master Bedroom',
-            'Under The Bed', 'Staffs Office', 'Sir Peters Room'
+            'Under The Bed', 'Staffs Office', 'Sir Peters Room', 'Behind a Statue', 'Next To a Plant'
         ];
 
         let name = roomName[this.getRandomInt(roomName.length)];

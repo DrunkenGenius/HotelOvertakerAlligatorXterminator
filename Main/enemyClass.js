@@ -7,8 +7,14 @@ class enemyClass {
         this.damage = this.damageGenerator();
         this.loot = this.loot();
         this.hp = this.healthGenerator();
+        this.xp = this.experience();
     }
 
+    experience(){
+        let exp = Math.round(this.name.length * this.level);
+        return exp; 
+    }
+    
     healthGenerator() {
         //let length = parseInt(this.name.length, 10);
         let hp = Math.round(this.name.length * this.level * 1.5);

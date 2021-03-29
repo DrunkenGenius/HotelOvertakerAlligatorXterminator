@@ -7,6 +7,12 @@ class enemyClass {
         this.damage = this.damageGenerator();
         this.loot = this.loot();
         this.hp = this.healthGenerator();
+        this.xp = this.experience();
+    }
+
+    experience(){
+        let exp = Math.round(this.name.length * this.level);
+        return exp; 
     }
 
     healthGenerator() {
@@ -27,9 +33,9 @@ class enemyClass {
     enemyLevel() {
         let level;
         let num = this.getRandomInt(3);
-        if (num <= 1)
-            level = 1; //skal være playerClass.level ;
-        else if (num > 1)
+        if (num >= 1)
+            level = 1;
+        else if (num < 1)
             level = this.getRandomInt(15) + 1;
         return level;
     }

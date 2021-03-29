@@ -16,8 +16,6 @@ class playerClass {
         let wepdmg = this.weapon.damage;
         return wepdmg;
     }
- 
-
 
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
@@ -40,10 +38,12 @@ class playerClass {
 
     setexperience(exp){
         this.xp += exp;
+        /*if (this.xp >  20)
+        this.setlevel(1);*/
     }
     
     setlevel(lvl){
-        thislevel += lvl
+        this.level += lvl;
     }
 
     inventory(){
