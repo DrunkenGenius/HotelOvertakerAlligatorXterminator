@@ -112,13 +112,14 @@ form button {
 #container0{
     text-align: center;
     width: 100%;
-    padding-top: 2%;
+    padding-top: 5%;
     grid-area: blanc1;
+    width: 100%;
+    height: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-color: black;
     background-image: url(Billeder/Alligator.jpg);
-    background-repeat: no-repeat;
-    background-position-x: 50%;
-    background-position-y: center;
 }
 
 #container2{
@@ -128,13 +129,14 @@ form button {
 #container3{
     text-align: center;
     width: 100%;
-    padding-top: 2%;
+    padding-top: 5%;
     grid-area: blanc2;
+    width: 100%;
+    height: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-color: black;
     background-image: url(Billeder/Alligator.jpg);
-    background-repeat: no-repeat;
-    background-position-x: 50%;
-    background-position-y: center;
 }
 
 #container4{
@@ -230,7 +232,7 @@ form button {
     font-size: 20px;
 }
 
-#gamePlay1{
+.centerText{
     text-align: center;
 }
 
@@ -242,6 +244,18 @@ form button {
 
 .CrocText{
     text-align: center;
+    width: 100%;
+    padding-top: 2%;
+}
+
+#croc1{
+    display: inline-block; 
+    width: 100%;
+    padding-top: 2%;
+}
+
+#croc2{
+    display: inline-block; 
     width: 100%;
     padding-top: 2%;
 }

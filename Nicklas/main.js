@@ -43,6 +43,26 @@ window.addEventListener('load', function () {
 
     const items = document.getElementById('playerItems')
     items.innerHTML = `Player Weapon Equipped: ${player1.weapon.name}`;
+    
+    //if(world.rooms[player1.location].enemies.length <= 1)
+    //{
+    const croc1 = document.getElementById('croc1');
+    croc1.innerHTML = 
+    `Croc Name: ${world.rooms[player1.location].enemies[0].enemyName} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[0].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[0].enemyDamage} </br>`;
+    //}
+
+    //if(world.rooms[player1.location].enemies.length > 1)
+    //{
+    const croc2 = document.getElementById('croc2');
+    croc2.innerHTML = 
+    `Croc Name: ${world.rooms[player1.location].enemies[1].enemyName} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[1].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[1].enemyDamage} </br>`;
+    //}
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
