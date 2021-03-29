@@ -46,14 +46,20 @@ class playerClass {
     setexperience(exp){
         this.xp += exp;
         if (this.xp >  this.levelreq){
-            this.setlevel(1);
             this.xp = 0;
+            this.setlevel(1);
+            
         }
         
     }
     
     setlevel(lvl){
-        this.level += lvl
+        this.level += lvl;
+        this.setHealth();
+    }
+
+    setHealth(){
+        this.hp += 20;
     }
 
     inventory(){
