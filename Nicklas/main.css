@@ -16,8 +16,8 @@ form {
     background: #000;
     padding: 3px;
     position: fixed;
-    bottom: 0;
-    width: 100%;
+    bottom: 30%;
+    width: 50%;
     color: white;
 }
 
@@ -41,7 +41,9 @@ form button {
 
 table{
     color: white;
-    width: 40%;
+    position: fixed;
+    width: 20%;
+    padding-top: 5%;
 }
 
 #messages {
@@ -99,8 +101,8 @@ table{
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: 
     "blanc1 search search blanc2"
-    "attack attack item item"
-    "blanc3 input input blanc4";
+    "blanc3 input input blanc4"
+    "player player item item";
     
 }
 
@@ -126,41 +128,41 @@ table{
 
 #container4{
     background-color: gold;
-    grid-area: attack;
+    grid-area: blanc3;
 }
 
 #container5{
     background-color: darkgoldenrod;
-    grid-area: attack;
+    grid-area: input;
 }
 
 #container6{
     background-color: darkkhaki;
-    grid-area: item;
+    grid-area: input;
 }
 
 #container7{
     background-color: darksalmon;
-    grid-area: item;
+    grid-area: blanc4;
 }
 
 #container8{
     background-color: darkturquoise;
-    grid-area: blanc3;
+    grid-area: player;
 }
 
 #container9{
     background-color: deeppink;
-    grid-area: input;
+    grid-area: player;
 }
 
 #container10{
     background-color: firebrick;
-    grid-area: input;
+    grid-area: item;
 }
 
 #container11{
     background-color: ghostwhite;
-    grid-area: blanc4;
+    grid-area: item;
 }
 
