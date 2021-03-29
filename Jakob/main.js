@@ -1,5 +1,5 @@
 let world = new worldCreatorClass();
-console.log(world.rooms);
+console.log(world.rooms[0].enemies);
 let player1 = new playerClass;
 console.log(player1);
 
@@ -79,27 +79,35 @@ window.addEventListener('load', function () {
             break;
 
         case 'ATTACK': {
+
             isFighting = true;
             let enemy = getEnemy(variable);
             console.log(enemy);
             printByLetter(`| You slowly walk towards your enemy. | You pull out: ${player1.weapon.name} | Enemy ${enemy.enemyName} Level: ${enemy.level} `);
 
-
             while (player1.hp >= 0 && enemy.hp >= 0 && isFighting == true) {
-                console.log('Fight loop');
+                
                 printByLetter(`${enemy.enemyName} hits you for ${enemy.enemyDamage}`);
                 player1.hp -= enemy.enemyDamage;
-                console.log(player1.hp);
-                //task(i);
+                console.log('Player HP: ' + player1.hp);
+
                 printByLetter(`${player1.enemyName} hits ${enemy.enemyName}  for ${player1.enemyDamage}`);
                 enemy.hp -= player1.damage();
-                console.log(enemy.hp);
+                console.log('Enemy HP: ' + enemy.hp);
+
+                if (player1.hp <= 0){
+                    alert('YOU LOST');
+                } 
+                else if (enemy.hp <= 0){
+                    console.log("You won");
+                    printByLetter(`${enemy.enemyName} was defeated`);
+                    player1.xp += 10;
+                }
+
+
             }
-            /*function task(i) {
-                setTimeout(function() {
-                    console.log(i);
-                }, 2000 * i);
-              }    */
+            
+
         }
         break;
 
