@@ -1,5 +1,5 @@
 let world = new worldCreatorClass();
-console.log(world.rooms);
+console.log(world.rooms[0].enemies);
 let player1 = new playerClass;
 console.log(player1);
 
@@ -10,14 +10,14 @@ let isFighting = false;
 //___________________________________________
 
 function printByLetter(message) {
-    let status = document.getElementById('gamePlay');
-    status.innerHTML = '';
+    let gamePlay = document.getElementById('gamePlay');
+    gamePlay.innerHTML = '';
     let i = 0;
     let interval = setInterval(function () {
         if (message.charAt(i) === "|")
-            status.innerHTML += '<br/>'
+            gamePlay.innerHTML += '<br/>'
         else
-            status.innerHTML += message.charAt(i);
+            gamePlay.innerHTML += message.charAt(i);
         i++;
         if (i > message.length) {
             clearInterval(interval);
@@ -70,24 +70,28 @@ const findIndexByName = (string, array) => {
 }
 
 window.addEventListener('load', function () {
-    const status = document.getElementById('status');
-    status.innerHTML = `Your status.. Player hp: 
-    ${player1.hp}, xp: ${player1.xp} level ${player1.level}`;
+
+    const status = document.getElementById('playerStats');
+    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp}/1 `;
+
+    const items = document.getElementById('playerItems')
+    items.innerHTML = `Player Weapon Equipped: ${player1.weapon.name}`;
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
 
     enterBtn.addEventListener('click', function () {
+        const gamePlay = document.getElementById('gamePlay');
+        gamePlay.innerHTML = `You try to ${userInput.value}: `;
+
         //Split input string
         let input = userInput.value.split(' ');
         let command = input[0];
         let variable = userInput.value.split(command + " ")[1];
-        console.log(variable);
 
         switch (command.toUpperCase()) {
-
             case 'SEARCH': {
-                status.innerHTML = "";
+                gamePlay.innerHTML = "";
                 let curRoomIndex = player1.location;
                 let nextRoomIndex = (player1.location + 1) % 3;
                 let lasRoomIndex = (player1.location + 2) % 3;
@@ -105,31 +109,40 @@ window.addEventListener('load', function () {
                 }
                 searchString += `What do you want to do... ?`
                 printByLetter(searchString);
+                ShowCrocs();
             }
                 break;
 
             case 'ATTACK': {
+
                 isFighting = true;
                 let enemy = getEnemy(variable);
                 console.log(enemy);
                 printByLetter(`| You slowly walk towards your enemy. | You pull out: ${player1.weapon.name} | Enemy ${enemy.name} Level: ${enemy.level} `);
 
-
                 while (player1.hp >= 0 && enemy.hp >= 0 && isFighting == true) {
-                    console.log('Fight loop');
-                    printByLetter(`${enemy.name} hits you for ${enemy.enemyDamage}`);
-                    player1.hp -= enemy.enemyDamage;
-                    console.log(player1.hp);
-                    //task(i);
-                    printByLetter(`${player1.name} hits ${enemy.name}  for ${player1.enemyDamage}`);
+
+                    printByLetter(`${enemy.name} hits you for ${enemy.damage}`);
+                    player1.hp -= enemy.damage;
+                    console.log('Player HP: ' + player1.hp);
+
+                    printByLetter(`${player1.name} hits ${enemy.name}  for ${player1.damage}`);
                     enemy.hp -= player1.damage();
-                    console.log(enemy.hp);
+                    console.log('Enemy HP: ' + enemy.hp);
+
+                    if (player1.hp <= 0) {
+                        alert('YOU LOST');
+                    }
+                    else if (enemy.hp <= 0) {
+                        console.log("You won");
+                        printByLetter(`${enemy.name} was defeated`);
+                        player1.xp += 10;
+                    }
+
+
                 }
-                /*function task(i) {
-                    setTimeout(function() {
-                        console.log(i);
-                    }, 2000 * i);
-                  }    */
+
+
             }
                 break;
 
@@ -168,3 +181,24 @@ window.addEventListener('load', function () {
     });
 
 });
+
+
+function ShowCrocs() {
+    if (world.rooms[player1.location].enemies.length >= 1) {
+        const croc1 = document.getElementById('croc1');
+        croc1.innerHTML =
+            `Croc Name: ${world.rooms[player1.location].enemies[0].name} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[0].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[0].damage} </br>`;
+    }
+
+    if (world.rooms[player1.location].enemies.length === 2) {
+        const croc2 = document.getElementById('croc2');
+        croc2.innerHTML =
+            `Croc Name: ${world.rooms[player1.location].enemies[1].name} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[1].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[1].damage} </br>`;
+    }
+}

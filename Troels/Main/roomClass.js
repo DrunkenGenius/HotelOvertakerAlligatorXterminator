@@ -3,7 +3,7 @@ class roomClass {
 
     constructor() {
         this.name = this.nameGenerator();
-        this.enemies = [new enemyClass(), new enemyClass()];
+        this.enemies = this.enemies();
 
     }
 
@@ -11,7 +11,7 @@ class roomClass {
         let num = this.getRandomInt(3);
         if (num == 0)
             return [new enemyClass()];
-        else if (num <= 1) {
+        else if (num <= 2) {
             let twoEnemies = [new enemyClass(), new enemyClass()]
             return twoEnemies;
         }
