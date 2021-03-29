@@ -20,43 +20,47 @@
 
 <body id="body">
     <div class="container">
-        <div id="container0">Blanc 0</div>
-        <div id="container1">Container1</div>
-        <div id="container2" id="mainInfo">
-            <p>
-                <b class="text">What do you want to do? (LOOK/ATTACK/LOOT/GOGO)</b>
-            <div id="gamePlay">...</div>
-            </p>
+        <div id="headline"></div>
+        <div id="container0" class="textColor" class="CrocText">Croc 1</div>
+        <div id="container2" id="mainInfo" class="textColor">
+            <div id="gamePlayHeading">What do you want to do? (SEARCH/ATTACK/LOOT/FLEE/DROP WEAPON)</div>
+            <br>
+            <div class="centerText">
+                <div id="gamePlay">...</div>
+            </div>
+
         </div>
-        <div id="container3">Blanc 1</div>
-        <div id="container4">Blanc 2</div>
+        <div id="container3" class="textColor" class="CrocText">Croc 2</div>
+        <div id="container4" class="textColor" class="CrocText">
+            Croc 1 Stats
+            <hr>
+            <div class="centerText">
+                <div id="croc1">No Crocodiles in sight...</div>
+            </div>
+        </div>
         <div id="container5"></div>
-        <div id="container6" id="input"><table>
+        <div id="container6" class="textColor" >
             <div id="heading1">Actions:</div>
-            <tr>
-                <th>SEARCH</th>
-                <th>ATTACK</th>
-                <th>LOOT</th>
-                <th>FLEE</th>
-                <th>DROP WEAPON</th>
-            </tr>
-            <tr></tr>
-        </table>
+            <div id="text1">SEARCH - ATTACK - LOOT - FLEE - DROP WEAPON</div>
+
 
         <form action="">
             <input type="text" id="userInput" id = "m"></input>
             <button type="button" id="enterBtn">ENTER</button>
             </form>
     </div>
-        <div id="container7">Blanc 4</div>
-
-        <div id="container8">Container8</div>
-        <div id="container9">
+        <div id="container7" class="textColor" class="CrocText">
+            Crock 2 Stats
+            <hr>
+            <div class="centerText">
+                <div id="croc2">No Crocodiles in sight...</div>
+            </div>
+        </div>
+        <div id="container9" class="textColor">
             <div id="playerStatsHeading">Player Stats:</div>
             <div id="playerStats"></div>
         </div>
-        <div id="container10">Container10</div>
-        <div id="container11">
+        <div id="container11" class="textColor">
             <div id="playerItemsHeading">Player Items:</div>
             <div id="playerItems"></div>
         </div>
