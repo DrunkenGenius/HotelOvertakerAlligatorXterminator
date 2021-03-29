@@ -72,10 +72,12 @@ const findIndexByName = (string, array) => {
 window.addEventListener('load', function () {
 
     const status = document.getElementById('playerStats');
-    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp}/1 `;
+    status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp}/1 `;
 
     const items = document.getElementById('playerItems')
-    items.innerHTML = `Player Weapon Equipped: ${player1.weapon.name}`;
+    items.innerHTML = 
+    `Weapon Equipped: ${player1.weapon.name} </br> 
+    Weapon Damage: ${player1.weapon.damage}`;
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
@@ -185,20 +187,25 @@ window.addEventListener('load', function () {
 
 function ShowCrocs() {
     if (world.rooms[player1.location].enemies.length >= 1) {
+        
         const croc1 = document.getElementById('croc1');
         croc1.innerHTML =
-            `Croc Name: ${world.rooms[player1.location].enemies[0].name} </br> 
-    Croc HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
-    Croc Level: ${world.rooms[player1.location].enemies[0].level} </br>
-    Croc Damage: ${world.rooms[player1.location].enemies[0].damage} </br>`;
+            `HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
+    Level: ${world.rooms[player1.location].enemies[0].level} </br>
+    Damage: ${world.rooms[player1.location].enemies[0].damage} </br>`;
+
+        const crocName = document.getElementById("container0");
+        crocName.innerHTML = `${world.rooms[player1.location].enemies[0].name}`;
     }
 
     if (world.rooms[player1.location].enemies.length === 2) {
         const croc2 = document.getElementById('croc2');
         croc2.innerHTML =
-            `Croc Name: ${world.rooms[player1.location].enemies[1].name} </br> 
-    Croc HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
-    Croc Level: ${world.rooms[player1.location].enemies[1].level} </br>
-    Croc Damage: ${world.rooms[player1.location].enemies[1].damage} </br>`;
+            `HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
+    Level: ${world.rooms[player1.location].enemies[1].level} </br>
+    Damage: ${world.rooms[player1.location].enemies[1].damage} </br>`;
+
+    const crocName = document.getElementById("container3");
+        crocName.innerHTML = `${world.rooms[player1.location].enemies[1].name}`;
     }
 }

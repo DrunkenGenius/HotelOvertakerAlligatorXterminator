@@ -28,6 +28,7 @@ form input {
 }
 
 form button {
+    margin-top: 1%;
     margin-left: 45%;
     width: 9%;
     background: rgb(130, 224, 255);
@@ -203,27 +204,29 @@ form button {
 #playerStatsHeading{
     text-align: center;
     font-size: 30px;
-    padding-left: 10%;
     padding-top: 1%;
 }
 
 #playerItemsHeading{
     text-align: center;
     font-size: 30px;
-    padding-left: 10%;
     padding-top: 1%;
 }
 
 #playerStats{
-    text-align: center;
+    display: inline-block; 
+    text-align: left;
+    padding-top: 2%;
     font-size: 20px;
-    padding-left: 10%;
+    
 }
 
 #playerItems{
-    text-align: center;
+    display: inline-block; 
+    text-align: left;
+    padding-top: 2%;
     font-size: 20px;
-    padding-left: 10%;
+    
 }
 
 #gamePlay{
@@ -232,32 +235,32 @@ form button {
     font-size: 20px;
 }
 
+#gamePlayHeading{
+    text-align: center;
+    font-size: 20px;
+}
+
 .centerText{
     text-align: center;
 }
 
-#gamePlayHeading{
-    text-align: center;
-    padding-top: 5%;
-    font-size: 25px;
-}
-
 .CrocText{
     text-align: center;
+    text-align: left;
     width: 100%;
     padding-top: 2%;
 }
 
 #croc1{
     display: inline-block; 
-    width: 100%;
-    padding-top: 2%;
+    text-align: left;
+    font-size: 15px;
 }
 
 #croc2{
     display: inline-block; 
-    width: 100%;
-    padding-top: 2%;
+    text-align: left;
+    font-size: 15px;
 }
 
 
