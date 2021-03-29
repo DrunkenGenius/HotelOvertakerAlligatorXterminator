@@ -2,16 +2,16 @@ class roomClass {
 
 
     constructor() {
-        this.nameGenerator = this.nameGenerator();
-        this.enemies = this.enemies();
+        this.name = this.nameGenerator();
+        this.enemies = [new enemyClass(), new enemyClass()];
 
     }
 
     enemies() {
         let num = this.getRandomInt(3);
         if (num == 0)
-            return new enemyClass();
-        else if (num <= 2) {
+            return [new enemyClass()];
+        else if (num <= 1) {
             let twoEnemies = [new enemyClass(), new enemyClass()]
             return twoEnemies;
         }
