@@ -10,7 +10,8 @@ class enemyClass {
     }
     
     healthGenerator(){
-        let hp = this.enemyName.length* this.level * 0.5
+        //let length = parseInt(this.enemyName.length, 10);
+        let hp = Math.round(this.enemyName.length * this.level * 1.5);
         return hp;
     }
 
