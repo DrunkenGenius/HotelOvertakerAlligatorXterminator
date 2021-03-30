@@ -5,7 +5,7 @@ class enemyClass {
         this.level = this.enemyLevel();
         this.name = this.nameGenerator();
         this.damage = this.damageGenerator();
-        this.loot = this.loot();
+        this.loot = this.lootGenerator();
         this.hp = this.healthGenerator();
         this.xp = this.experience();
     }
@@ -21,13 +21,21 @@ class enemyClass {
         return hp;
     }
 
-    loot() {
+    lootGenerator() {
         let foodloot = new foodClass();
-        let weaponloot;
-        if (this.getRandomInt(3) <= 1)
-            weaponloot = new weaponClass();
         let enemyLootArray = [];
-        return enemyLootArray = [foodloot, weaponloot];
+        let weaponloot;
+        if (this.getRandomInt(3) <= 1) {
+            weaponloot = new weaponClass();
+            return enemyLootArray = [foodloot, weaponloot];
+        } else
+            return enemyLootArray = [foodloot];
+    }
+
+    dropLoot() {
+        let droppedLoot = this.loot;
+        this.loot = [];
+        return droppedLoot;
     }
 
     enemyLevel() {

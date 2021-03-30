@@ -4,7 +4,7 @@ class roomClass {
     constructor() {
         this.name = this.nameGenerator();
         this.enemies = this.enemies();
-
+        this.loot = [];
     }
 
     enemies() {
@@ -32,6 +32,7 @@ class roomClass {
         return name;
     }
 
-
-
+    addLoot(item) {
+        this.loot.push(item);
+    }
 }

@@ -109,14 +109,16 @@ function GameLoop(userInput, status) {
     switch (command.toUpperCase()) {
         case 'SEARCH': {
             gamePlay.innerHTML = "";
+            //Find index af de to rum vi ikke er i. Her bruges % modulus
             let curRoomIndex = player1.location;
             let nextRoomIndex = (player1.location + 1) % 3;
             let lasRoomIndex = (player1.location + 2) % 3;
 
+            //Hvad rummet hedder og hvilke rum der er i det
             let searchString = `You look around in ${world.rooms[curRoomIndex].name}... The room connects to two other rooms in the Hotel: | 
                     ${nextRoomIndex}: ${world.rooms[nextRoomIndex].name} |
                     ${lasRoomIndex}: ${world.rooms[lasRoomIndex].name}   |`;
-
+            //Hvis der er enemies i rummed tilføjes de til stringen
             if (world.rooms[curRoomIndex].enemies.length > 0) {
                 console.log("GG");
                 searchString += `Scary foes lurks in the room: | `;
@@ -125,13 +127,13 @@ function GameLoop(userInput, status) {
                 });
             }
             searchString += `What do you want to do... ?`;
+            //Her printes searchString
             printByLetter(searchString);
             UpdateCrocStatus();
         }
             break;
 
         case 'ATTACK': {
-
             isFighting = true;
             let enemy = getEnemy(variable);
             console.log(enemy);
@@ -151,11 +153,23 @@ function GameLoop(userInput, status) {
                     alert('YOU LOST');
                 }
                 else if (enemy.hp <= 0) {
-                    printByLetter(`${enemy.name} was defeated`);
+                    let defeatString = `${enemy.name} was defeated. It dropped: |`;
+
+                    //Fjern items fra enemy og placer i room
+                    items = enemy.dropLoot();
+                    items.forEach((element, i) => {
+                        world.rooms[player1.location].addLoot(element);
+                        defeatString += `${i}: ${JSON.stringify(element)}`
+                    });
+
+
+                    printByLetter(defeatString);
                     player1.setexperience(enemy.xp);
                     player1.setXPreq(100);
                     status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
                     let enemyIndex = findIndexByName(enemy.name, world.rooms[player1.location].enemies);
+
+                    console.log(world.rooms[player1.location].loot)
                     world.rooms[player1.location].enemies.splice(enemyIndex, 1);
                     UpdateCrocStatus();
                 }
@@ -168,6 +182,9 @@ function GameLoop(userInput, status) {
             break;
 
         case 'LOOT': {
+            if (variable === undefined) {
+                printByLetter(`On the floor lies: ${JSON.stringify(world.rooms[player1.location].loot)}`)
+            }
         }
             break;
 
