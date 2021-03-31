@@ -58,10 +58,10 @@ class playerClass {
 
 
     addItem(theItem) {
-        if (theItem.name == 'Food') {
-            player1.food += theItem.food;
-        }
-        this.inventory.push(theItem);
+        if (theItem.name.toUpperCase() == 'Food'.toUpperCase()) {
+            this.food += theItem.food;
+        } else
+            this.inventory.push(theItem);
     }
 
     removeItem(theItem) {

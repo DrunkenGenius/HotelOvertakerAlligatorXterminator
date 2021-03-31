@@ -12,7 +12,7 @@ class foodClass {
             food = 4;
         }
         else if (number >= 2) {
-             food = 2;
+            food = 2;
         }
         else if (number >= 1) {
             food = 1;

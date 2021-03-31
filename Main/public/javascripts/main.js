@@ -33,9 +33,9 @@ function printByLetter(message) {
 const findInArrayByInput = (input, searchArray, returnAsObject, promptString) => {
     let index = parseInt(input);
     if (isNaN(index)) {
-        index = findIndexByName(input, world.rooms[player1.location].enemies);
+        index = findIndexByName(input, searchArray);
         console.log(index);
-        while (world.rooms[player1.location].enemies[index] === undefined) {
+        while (searchArray[index] === undefined) {
             reply = prompt(promptString);
             if (isNaN(parseInt(reply))) {
                 index = findIndexByName(reply, searchArray);
@@ -104,7 +104,6 @@ function GameLoop(userInput, status) {
                     ${lasRoomIndex}: ${world.rooms[lasRoomIndex].name}   |`;
             //Hvis der er enemies i rummed tilføjes de til stringen
             if (world.rooms[curRoomIndex].enemies.length > 0) {
-                console.log("GG");
                 searchString += `Scary foes lurks in the room: | `;
                 world.rooms[curRoomIndex].enemies.forEach((enemy, index) => {
                     searchString += `${index}: ${enemy.name}.. a level ${enemy.level} alligator |`;
@@ -151,7 +150,7 @@ function GameLoop(userInput, status) {
                     player1.setXPreq();
                     let enemyIndex = findIndexByName(enemy.name, world.rooms[player1.location].enemies);
 
-                    console.log(world.rooms[player1.location].loot)
+                    //console.log(world.rooms[player1.location].loot)
                     world.rooms[player1.location].enemies.splice(enemyIndex, 1);
                     UpdateCrocStatus();
                 }
@@ -168,6 +167,8 @@ function GameLoop(userInput, status) {
             if (variable === undefined) {
                 printByLetter(`On the floor lies: ${JSON.stringify(world.rooms[player1.location].loot)}`)
             } else {
+                console.log(world.rooms[player1.location].loot[1].name);
+                lootIndex = findInArrayByInput(variable, world.rooms[player1.location].loot, true, "this item has not been found. Write it's name or number");
                 loot = findInArrayByInput(variable, world.rooms[player1.location].loot, true, "this item has not been found. Write it's name or number");
                 player1.addItem(loot);
             }
