@@ -169,8 +169,12 @@ function GameLoop(userInput, status) {
             break;
 
         case 'LOOT': {
+            let loot;
             if (variable === undefined) {
                 printByLetter(`On the floor lies: ${JSON.stringify(world.rooms[player1.location].loot)}`)
+            } else {
+                loot = findInArrayByInput(variable, world.rooms[player1.location].loot, true, "this item has not been found. Write it's name or number");
+                player1.addItem(loot);
             }
         }
             break;
