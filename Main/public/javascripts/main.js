@@ -255,7 +255,7 @@ function playerRefreshStats() {
     items.innerHTML = `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
     inventory.innerHTML = '';
     for (let index = 0; index < player1.inventory.length; index++) {
-        inventory.innerHTML += `Item ${index}: ${player1.inventory[index].name}, ${player1.inventory[index].damage} dmg. </br>`
+        inventory.innerHTML += `${index}: ${player1.inventory[index].name}, ${player1.inventory[index].damage} dmg. </br>`
     }
 }
 
@@ -269,12 +269,18 @@ function UpdateCrocStatus() {
 
         const crocName = document.getElementById("container0");
         crocName.innerHTML = `${world.rooms[player1.location].enemies[0].name}`;
+
+        const hide = document.getElementById('container0');
+        hide.style.visibility = 'visible';
     } else {
         const croc1 = document.getElementById('croc1');
         croc1.innerHTML = "";
 
         const crocName = document.getElementById("container0");
         crocName.innerHTML = "";
+
+        const hide = document.getElementById('container0');
+        hide.style.visibility = 'hidden';
     }
 
     if (world.rooms[player1.location].enemies[1] !== undefined) {
@@ -286,12 +292,18 @@ function UpdateCrocStatus() {
 
         const crocName = document.getElementById("container3");
         crocName.innerHTML = `${world.rooms[player1.location].enemies[1].name}`;
+
+        const hide = document.getElementById('container3');
+        hide.style.visibility = 'visible';
     } else {
         const croc1 = document.getElementById('croc2');
         croc1.innerHTML = "";
 
         const crocName = document.getElementById("container3");
         crocName.innerHTML = "";
+
+        const hide = document.getElementById('container3');
+        hide.style.visibility = 'hidden';
     }
 }
 
