@@ -136,14 +136,16 @@ function GameLoop(userInput, status) {
             if (player1.hp <= 0) {
                 alert('YOU LOST');
             } else if (enemy.hp <= 0) {
-                let defeatString = `${enemy.name} was defeated. It dropped: |`;
+                let defeatString = `${enemy.name} was defeated. Check for loot? |`;
 
+                
                 //Fjern items fra enemy og placer i room
                 items = enemy.dropLoot();
-                items.forEach((element, i) => {
+                items.forEach((element) => {
                     world.rooms[player1.location].addLoot(element);
-                    defeatString += `${i}: ${JSON.stringify(element)}`
+                    //defeatString += `${i}: ${JSON.stringify(element)}`
                 });
+                
 
 
                 printByLetter(defeatString);
