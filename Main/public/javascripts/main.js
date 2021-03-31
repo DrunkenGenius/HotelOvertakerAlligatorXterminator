@@ -191,8 +191,8 @@ function GameLoop(userInput, status) {
     break;
 
     case 'EQUIP': {
-        player1.equipWeapon();
-        playerRefreshStats()
+        player1.equipWeapon(0);
+        playerRefreshStats();
     }
 
     break;
@@ -203,7 +203,7 @@ function GameLoop(userInput, status) {
             printByLetter('You eat and gain 10 HP');
             playerRefreshStats();
         } else
-            printByLetter('You have no more food.')
+            printByLetter('You have no more food.');
 
     }
 
@@ -244,7 +244,7 @@ function GameLoop(userInput, status) {
         items.innerHTML = `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
         inventory.innerHTML = '';
         for (let index = 0; index < player1.inventory.length; index++) {
-            inventory.innerHTML += `Item ${index}: ${player1.inventory[index].name} </br>`
+            inventory.innerHTML = `Item ${index}: ${player1.inventory[index].name} </br>`
         }
     }
 
