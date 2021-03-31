@@ -76,8 +76,9 @@ class playerClass {
         this.weapon = this.inventory.splice(lootIndex, 1);
     }
 
-    eat(foodAmount){
-        this.hp += 10 * foodAmount;
+    eat(){
+        this.hp += 10;
+        this.food -= 1;
     }
 
 }
