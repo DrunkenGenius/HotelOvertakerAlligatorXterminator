@@ -204,7 +204,11 @@ function GameLoop(userInput, status) {
             break;
 
         case 'EQUIP' : {
-            
+            player1.equipWeapon();
+        }
+
+        case 'EAT' : {
+            player1.eat();
         }
 
         break;

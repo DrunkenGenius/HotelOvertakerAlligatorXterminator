@@ -10,6 +10,7 @@ class playerClass {
         this.location = 0;
         this.damage = this.weapon.damage;
         this.levelreq = 10;
+        this.food = 5;
 
     }
 
@@ -41,9 +42,7 @@ class playerClass {
         if (this.xp > this.levelreq) {
             this.xp = 0;
             this.setlevel(1);
-
         }
-
     }
 
     setlevel(lvl) {
@@ -61,6 +60,9 @@ class playerClass {
     }
 
     addItem(theItem) {
+        if (theItem == 'Food'){
+            player1.food += theItem;
+        }
         this.inventory.push(theItem);
     }
 
@@ -71,6 +73,10 @@ class playerClass {
     equipWeapon(lootIndex){
         this.inventory.push(this.weapon);
         this.weapon = this.inventory.splice(lootIndex, 1);
+    }
+
+    eat(foodAmount){
+        this.hp += 10 * foodAmount;
     }
 
 
