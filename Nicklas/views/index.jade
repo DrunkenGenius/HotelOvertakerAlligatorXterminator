@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    .container
+      #headline
+      #container0.textColor.CrocText
+      #container2.textColor
+        #gamePlayHeading What do you want to do?
+        br
+        .centerText
+          #gamePlay ...
+      #container3.textColor
+      #container4.textColor
+        | Stats
+        hr
+        .centerText
+          #croc1 No Crocodiles in sight...
+      #container5
+      #container6.textColor
+        #heading1 Actions:
+        #text1 SEARCH - ATTACK - LOOT - FLEE - DROP WEAPON
+        form(action='')
+          input#userInput(type='text')
+          button#enterBtn(type='button') ENTER
+      #container7.textColor
+        | Stats
+        hr
+        .centerText
+          #croc2 No Crocodiles in sight...
+      #container9.textColor
+        #playerStatsHeading Player Stats:
+        .centerText
+          #playerStats
+      #container11.textColor
+        #playerItemsHeading Player Items:
+        .centerText
+          #playerItems
