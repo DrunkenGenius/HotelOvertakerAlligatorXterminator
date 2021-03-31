@@ -67,18 +67,14 @@ window.addEventListener('load', function () {
     enterBtn.addEventListener('click', function () {
         GameLoop(userInput, status);
     });
-    document.addEventListener('keypress', enterKey);
 
-    function enterKey(event) {
-        console.log(event.code);
-        //event.preventDefault();
-        if (event.code == "Enter") {
+    $(window).keydown(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
             GameLoop(userInput, status);
+            return false;
         }
-    }
-
-
-
+    });
 });
 
 
@@ -191,6 +187,7 @@ function GameLoop(userInput, status) {
     }
 
 
+
     break;
 
     case 'EQUIP': {
@@ -217,113 +214,116 @@ function GameLoop(userInput, status) {
         let roomIndex = findInArrayByInput(variable, world.rooms, false, "this room has not been found. Write it's name or number");
         player1.location = roomIndex;
         printByLetter(`You have entered: ${world.rooms[roomIndex].name}`);
-        break;
+
     }
+    break;
 
     case 'SAVEGAME': {
         saveGameState();
         printByLetter('Saving game. . . Success');
-        break;
+
     }
+    break;
 
     default: {
         printByLetter('command not recognized...');
     }
+
     }
 }
 
-function playerRefreshStats() {
-    //-------------------------------
-    const status = document.getElementById('playerStats');
-    const items = document.getElementById('playerItems');
-    const inventory = document.getElementById('playerInventory');
+    function playerRefreshStats() {
+        //-------------------------------
+        const status = document.getElementById('playerStats');
+        const items = document.getElementById('playerItems');
+        const inventory = document.getElementById('playerInventory');
 
-    ///--------------------------------
+        ///--------------------------------
 
-    status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> XP: ${player1.xp} / ${player1.levelreq} </br> Food: ${player1.food} `;
-    items.innerHTML = `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
-    inventory.innerHTML = '';
-    for (let index = 0; index < player1.inventory.length; index++) {
-        inventory.innerHTML += `Item ${index}: ${player1.inventory[index].name} </br>`
+        status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> XP: ${player1.xp} / ${player1.levelreq} </br> Food: ${player1.food} `;
+        items.innerHTML = `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
+        inventory.innerHTML = '';
+        for (let index = 0; index < player1.inventory.length; index++) {
+            inventory.innerHTML += `Item ${index}: ${player1.inventory[index].name} </br>`
+        }
     }
-}
 
-function UpdateCrocStatus() {
-    if (world.rooms[player1.location].enemies[0] !== undefined) {
-        const croc1 = document.getElementById('croc1');
-        croc1.innerHTML =
-            `HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
+    function UpdateCrocStatus() {
+        if (world.rooms[player1.location].enemies[0] !== undefined) {
+            const croc1 = document.getElementById('croc1');
+            croc1.innerHTML =
+                `HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
         Level: ${world.rooms[player1.location].enemies[0].level} </br>
         Damage: ${world.rooms[player1.location].enemies[0].damage} </br>`;
 
-        const crocName = document.getElementById("container0");
-        crocName.innerHTML = `${world.rooms[player1.location].enemies[0].name}`;
-    } else {
-        const croc1 = document.getElementById('croc1');
-        croc1.innerHTML = "";
+            const crocName = document.getElementById("container0");
+            crocName.innerHTML = `${world.rooms[player1.location].enemies[0].name}`;
+        } else {
+            const croc1 = document.getElementById('croc1');
+            croc1.innerHTML = "";
 
-        const crocName = document.getElementById("container0");
-        crocName.innerHTML = "";
-    }
+            const crocName = document.getElementById("container0");
+            crocName.innerHTML = "";
+        }
 
-    if (world.rooms[player1.location].enemies[1] !== undefined) {
-        const croc2 = document.getElementById('croc2');
-        croc2.innerHTML =
-            `HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
+        if (world.rooms[player1.location].enemies[1] !== undefined) {
+            const croc2 = document.getElementById('croc2');
+            croc2.innerHTML =
+                `HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
             Level: ${world.rooms[player1.location].enemies[1].level} </br>
             Damage: ${world.rooms[player1.location].enemies[1].damage} </br>`;
 
-        const crocName = document.getElementById("container3");
-        crocName.innerHTML = `${world.rooms[player1.location].enemies[1].name}`;
-    } else {
-        const croc1 = document.getElementById('croc2');
-        croc1.innerHTML = "";
-
-        const crocName = document.getElementById("container3");
-        crocName.innerHTML = "";
-    }
-}
-
-
-
-//------------------------------------------------------------------ AJAX METHODS --------------------------------------"
-
-const saveGameState = () => {
-    let gameState = {
-        username: username,
-        world: world,
-        player: player1
-    };
-    console.log(gameState);
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/saveGameState",
-        dataType: "json",
-        data: gameState
-    }).done(function (data) {
-        console.log("SavedState: " + data)
-    });
-
-}
-
-function getWorld() {
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/getWorld",
-        dataType: "json",
-        data: {
-            username: username
-        }
-    }).done(function (data) {
-        console.log(data);
-        if (data === "userNotInDB") {
-            console.log("userNotInDB use created world");
-            printByLetter(`No user was found under username: ${username}. Therefore, a new world has been created|You are:| Name: ${player1.name}|Level: ${player1.level}`);
+            const crocName = document.getElementById("container3");
+            crocName.innerHTML = `${world.rooms[player1.location].enemies[1].name}`;
         } else {
-            world = data.world;
-            player1 = data.player;
-            printByLetter(`You have succesfully loaded as user: ${username}. | Name: ${player1.name}|Level: ${player1.level}`);
+            const croc1 = document.getElementById('croc2');
+            croc1.innerHTML = "";
 
+            const crocName = document.getElementById("container3");
+            crocName.innerHTML = "";
         }
-    });
-}
+    }
+
+
+
+    //------------------------------------------------------------------ AJAX METHODS --------------------------------------"
+
+    const saveGameState = () => {
+        let gameState = {
+            username: username,
+            world: world,
+            player: player1
+        };
+        console.log(gameState);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/saveGameState",
+            dataType: "json",
+            data: gameState
+        }).done(function (data) {
+            console.log("SavedState: " + data)
+        });
+
+    }
+
+    function getWorld() {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/getWorld",
+            dataType: "json",
+            data: {
+                username: username
+            }
+        }).done(function (data) {
+            console.log(data);
+            if (data === "userNotInDB") {
+                console.log("userNotInDB use created world");
+                printByLetter(`No user was found under username: ${username}. Therefore, a new world has been created|You are:| Name: ${player1.name}|Level: ${player1.level}`);
+            } else {
+                world = data.world;
+                player1 = data.player;
+                printByLetter(`You have succesfully loaded as user: ${username}. | Name: ${player1.name}|Level: ${player1.level}`);
+
+            }
+        });
+    }
