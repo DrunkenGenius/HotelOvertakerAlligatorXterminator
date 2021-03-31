@@ -25,41 +25,28 @@ function printByLetter(message) {
     }, 50);
 }
 
-const getEnemy = (enemyInput) => {
-    let enemyIndex = parseInt(enemyInput);
-    if (isNaN(enemyIndex)) {
-        enemyIndex = findIndexByName(enemyInput, world.rooms[player1.location].enemies);
-        console.log(enemyIndex);
-        while (world.rooms[player1.location].enemies[enemyIndex] === undefined) {
-            reply = prompt("Enemy not recognized.. Write Number or name of enemy");
+const findInArrayByInput = (input, searchArray, returnAsObject, promptString) => {
+    let index = parseInt(input);
+    if (isNaN(index)) {
+        index = findIndexByName(input, world.rooms[player1.location].enemies);
+        console.log(index);
+        while (world.rooms[player1.location].enemies[index] === undefined) {
+            reply = prompt(promptString);
             if (isNaN(parseInt(reply))) {
-                enemyIndex = findIndexByName(reply, world.rooms[player1.location].enemies);
+                index = findIndexByName(reply, searchArray);
             } else {
-                enemyIndex = parseInt(reply);
+                index = parseInt(reply);
             }
         }
-        return world.rooms[player1.location].enemies[enemyIndex];
+        if (returnAsObject)
+            return searchArray[index];
+        else
+            return index
     } else {
-        return world.rooms[player1.location].enemies[enemyIndex];
-    }
-}
-
-const getRoom = (roomInput) => {
-    let roomIndex = parseInt(roomInput);
-    if (isNaN(roomIndex)) {
-        roomIndex = findIndexByName(roomInput, world.rooms);
-        console.log(roomIndex);
-        while (world.rooms[roomIndex] === undefined) {
-            reply = prompt("Room not recognized.. Write Number or name of room");
-            if (isNaN(parseInt(reply))) {
-                roomIndex = findIndexByName(reply, world.rooms);
-            } else {
-                roomIndex = parseInt(reply);
-            }
-        }
-        return roomIndex;
-    } else {
-        return roomIndex;
+        if (returnAsObject)
+            return searchArray[index];
+        else
+            return index
     }
 }
 
@@ -135,7 +122,7 @@ function GameLoop(userInput, status) {
 
         case 'ATTACK': {
             isFighting = true;
-            let enemy = getEnemy(variable);
+            let enemy = findInArrayByInput(variable, world.rooms[player1.location].enemies, true, "this enemy has not been found. Write it's name or number");
             console.log(enemy);
             printByLetter(`| You slowly walk towards your enemy. | You pull out: ${player1.weapon.name} | Enemy ${enemy.name} Level: ${enemy.level} `);
 
@@ -205,7 +192,7 @@ function GameLoop(userInput, status) {
 
 
         case 'GOTO': {
-            let roomIndex = getRoom(variable);
+            let roomIndex = findInArrayByInput(variable, world.rooms, false, "this room has not been found. Write it's name or number");
             player1.location = roomIndex;
             printByLetter(`You have entered: ${world.rooms[roomIndex].name}`);
             break;

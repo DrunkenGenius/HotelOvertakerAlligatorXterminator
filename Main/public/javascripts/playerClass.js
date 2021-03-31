@@ -68,5 +68,10 @@ class playerClass {
         this.inventory.splice(theItem, 1);
     }
 
+    equipWeapon(lootIndex){
+        this.inventory.push(this.weapon);
+        this.weapon = this.inventory.splice(lootIndex, 1);
+    }
+
 
 }
