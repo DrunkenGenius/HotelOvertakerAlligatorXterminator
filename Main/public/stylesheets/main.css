@@ -213,12 +213,17 @@ form button {
     padding-top: 1%;
 }
 
+#playerInventoryHeading{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 1%;
+}
+
 #playerStats{
     display: inline-block; 
     text-align: left;
     padding-top: 2%;
     font-size: 20px;
-    
 }
 
 #playerItems{
@@ -226,7 +231,13 @@ form button {
     text-align: left;
     padding-top: 2%;
     font-size: 20px;
-    
+}
+
+#playerInventory{
+    display: inline-block; 
+    text-align: left;
+    padding-top: 2%;
+    font-size: 20px; 
 }
 
 #gamePlay{
