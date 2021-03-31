@@ -61,6 +61,9 @@ class playerClass {
     }
 
     addItem(theItem) {
+        if (theItem == 'Food'){
+            player1.food += theItem;
+        }
         this.inventory.push(theItem);
     }
 
@@ -73,5 +76,8 @@ class playerClass {
         this.weapon = this.inventory.splice(lootIndex, 1);
     }
 
+    eat(foodAmount){
+        this.hp += 10 * foodAmount;
+    }
 
 }

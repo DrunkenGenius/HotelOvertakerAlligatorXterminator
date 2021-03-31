@@ -66,6 +66,12 @@ window.addEventListener('load', function () {
         `Weapon Equipped: ${player1.weapon.name} </br> 
     Weapon Damage: ${player1.weapon.damage}`;
 
+    const inventory = document.getElementById('playerInventory')
+    for (let index = 0; index < player1.inventory.length; index++) {
+    inventory.innerHTML += 
+        `Item ${index + 1}: ${player1.inventory[index].name} </br>`
+    }
+
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
 
@@ -180,6 +186,8 @@ function GameLoop(userInput, status) {
             break;
 
         case 'DROP ITEM': {
+            player1.removeItem();
+
         }
             break;
 
@@ -193,6 +201,14 @@ function GameLoop(userInput, status) {
 
         }
             break;
+
+            case 'EQUIP' : {
+                player1.equipWeapon();
+            }
+
+            case 'EAT' : {
+                player1.eat();
+            }
 
 
         case 'GOTO': {
