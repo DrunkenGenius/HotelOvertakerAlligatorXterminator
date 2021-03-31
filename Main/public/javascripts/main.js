@@ -68,8 +68,8 @@ window.addEventListener('load', function () {
 
     const inventory = document.getElementById('playerInventory')
     for (let index = 0; index < player1.inventory.length; index++) {
-    inventory.innerHTML += 
-        `Item ${index + 1}: ${player1.inventory[index].name} </br>`
+        inventory.innerHTML +=
+            `Item ${index + 1}: ${player1.inventory[index].name} </br>`
     }
 
     const enterBtn = document.getElementById('enterBtn');
@@ -78,15 +78,14 @@ window.addEventListener('load', function () {
     enterBtn.addEventListener('click', function () {
         GameLoop(userInput, status);
     });
-    document.addEventListener('keypress', enterKey);
 
-    function enterKey(event) {
-        console.log(event.code);
-        //event.preventDefault();
-        if (event.code == "Enter") {
+    $(window).keydown(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
             GameLoop(userInput, status);
+            return false;
         }
-    }
+    });
 });
 
 
@@ -201,19 +200,18 @@ function GameLoop(userInput, status) {
 
         }
 
-        
-            break;
-
-            case 'EQUIP' : {
-                player1.equipWeapon();
-            }
 
             break;
 
-            case 'EAT' : {
-                player1.eat();
-            }
+        case 'EQUIP': {
+            player1.equipWeapon();
+        }
 
+            break;
+
+        case 'EAT': {
+            player1.eat();
+        }
             break;
 
 
