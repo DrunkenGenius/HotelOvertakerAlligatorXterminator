@@ -263,12 +263,18 @@ function UpdateCrocStatus() {
 
         const crocName = document.getElementById("container0");
         crocName.innerHTML = `${world.rooms[player1.location].enemies[0].name}`;
+
+        const hide = document.getElementById('container0');
+        hide.style.visibility = 'visible';
     } else {
         const croc1 = document.getElementById('croc1');
         croc1.innerHTML = "";
 
         const crocName = document.getElementById("container0");
         crocName.innerHTML = "";
+
+        const hide = document.getElementById('container0');
+        hide.style.visibility = 'hidden';
     }
 
     if (world.rooms[player1.location].enemies[1] !== undefined) {
@@ -280,12 +286,18 @@ function UpdateCrocStatus() {
 
         const crocName = document.getElementById("container3");
         crocName.innerHTML = `${world.rooms[player1.location].enemies[1].name}`;
+
+        const hide = document.getElementById('container3');
+        hide.style.visibility = 'visible';
     } else {
         const croc1 = document.getElementById('croc2');
         croc1.innerHTML = "";
 
         const crocName = document.getElementById("container3");
         crocName.innerHTML = "";
+
+        const hide = document.getElementById('container3');
+        hide.style.visibility = 'hidden';
     }
 }
 
