@@ -8,6 +8,7 @@ player1.addItem(wep1);
 let isFighting = false;
 //___________________________________________
 let interval;
+
 function printByLetter(message) {
     clearInterval(interval);
     let gamePlay = document.getElementById('gamePlay');
@@ -131,104 +132,102 @@ function GameLoop(userInput, status) {
             printByLetter(searchString);
             UpdateCrocStatus();
         }
-            break;
-
-        case 'ATTACK': {
-            isFighting = true;
-            let enemy = getEnemy(variable);
-            console.log(enemy);
-            printByLetter(`| You slowly walk towards your enemy. | You pull out: ${player1.weapon.name} | Enemy ${enemy.name} Level: ${enemy.level} `);
-
-            while (player1.hp >= 0 && enemy.hp >= 0 && isFighting == true) {
-
-                printByLetter(`${enemy.name} hits you for ${enemy.damage}`);
-                player1.hp -= enemy.damage;
-                console.log('Player HP: ' + player1.hp);
-
-                printByLetter(`${player1.name} hits ${enemy.name}  for ${player1.damage}`);
-                enemy.hp -= player1.damage;
-                console.log('Enemy HP: ' + enemy.hp);
-
-                if (player1.hp <= 0) {
-                    alert('YOU LOST');
-                }
-                else if (enemy.hp <= 0) {
-                    let defeatString = `${enemy.name} was defeated. It dropped: |`;
-
-                    //Fjern items fra enemy og placer i room
-                    items = enemy.dropLoot();
-                    items.forEach((element, i) => {
-                        world.rooms[player1.location].addLoot(element);
-                        defeatString += `${i}: ${JSON.stringify(element)}`
-                    });
-
-
-                    printByLetter(defeatString);
-                    player1.setexperience(enemy.xp);
-                    player1.setXPreq(100);
-                    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
-                    let enemyIndex = findIndexByName(enemy.name, world.rooms[player1.location].enemies);
-
-                    console.log(world.rooms[player1.location].loot)
-                    world.rooms[player1.location].enemies.splice(enemyIndex, 1);
-                    UpdateCrocStatus();
-                }
-
-
-            }
-
-
-        }
-            break;
-
-        case 'LOOT': {
-            if (variable === undefined) {
-                printByLetter(`On the floor lies: ${JSON.stringify(world.rooms[player1.location].loot)}`)
-            }
-        }
-            break;
-
-        case 'DROP ITEM': {
-        }
-            break;
-
-        case 'FLEE': {
-            if (isFighting == true) {
-                isFighting = false;
-                printByLetter(` You fled from the enemy, prideless and weak`);
-            }
-            else
-                printByLetter(` You fled from a weird inhuman sound, it was your own fart. | Shame on you.`);
-
-        }
-            break;
-
-        case 'EQUIP' : {
-            player1.equipWeapon();
-        }
-
-        case 'EAT' : {
-            player1.eat();
-        }
-
         break;
 
-        case 'GOTO': {
-            let roomIndex = getRoom(variable);
-            player1.location = roomIndex;
-            printByLetter(`You have entered: ${world.rooms[roomIndex].name}`);
-            break;
+    case 'ATTACK': {
+        isFighting = true;
+        let enemy = getEnemy(variable);
+        console.log(enemy);
+        printByLetter(`| You slowly walk towards your enemy. | You pull out: ${player1.weapon.name} | Enemy ${enemy.name} Level: ${enemy.level} `);
+
+        while (player1.hp >= 0 && enemy.hp >= 0 && isFighting == true) {
+
+            printByLetter(`${enemy.name} hits you for ${enemy.damage}`);
+            player1.hp -= enemy.damage;
+            console.log('Player HP: ' + player1.hp);
+
+            printByLetter(`${player1.name} hits ${enemy.name}  for ${player1.damage}`);
+            enemy.hp -= player1.damage;
+            console.log('Enemy HP: ' + enemy.hp);
+
+            if (player1.hp <= 0) {
+                alert('YOU LOST');
+            } else if (enemy.hp <= 0) {
+                let defeatString = `${enemy.name} was defeated. It dropped: |`;
+
+                //Fjern items fra enemy og placer i room
+                items = enemy.dropLoot();
+                items.forEach((element, i) => {
+                    world.rooms[player1.location].addLoot(element);
+                    defeatString += `${i}: ${JSON.stringify(element)}`
+                });
+
+
+                printByLetter(defeatString);
+                player1.setexperience(enemy.xp);
+                player1.setXPreq(100);
+                status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
+                let enemyIndex = findIndexByName(enemy.name, world.rooms[player1.location].enemies);
+
+                console.log(world.rooms[player1.location].loot)
+                world.rooms[player1.location].enemies.splice(enemyIndex, 1);
+                UpdateCrocStatus();
+            }
+
+
         }
 
-        case 'SAVEGAME': {
-            saveGameState();
-            printByLetter('Saving game. . . Success');
-            break;
-        }
 
-        default: {
-            printByLetter('command not recognized...');
+    }
+    break;
+
+    case 'LOOT': {
+        if (variable === undefined) {
+            printByLetter(`On the floor lies: ${JSON.stringify(world.rooms[player1.location].loot)}`)
         }
+    }
+    break;
+
+    case 'DROP ITEM': {}
+    player1.removeItem();
+    break;
+
+    case 'FLEE': {
+        if (isFighting == true) {
+            isFighting = false;
+            printByLetter(` You fled from the enemy, prideless and weak`);
+        } else
+            printByLetter(` You fled from a weird inhuman sound, it was your own fart. | Shame on you.`);
+
+    }
+    break;
+
+    case 'EQUIP': {
+        player1.equipWeapon();
+    }
+
+    case 'EAT': {
+        player1.eat();
+    }
+
+    break;
+
+    case 'GOTO': {
+        let roomIndex = getRoom(variable);
+        player1.location = roomIndex;
+        printByLetter(`You have entered: ${world.rooms[roomIndex].name}`);
+        break;
+    }
+
+    case 'SAVEGAME': {
+        saveGameState();
+        printByLetter('Saving game. . . Success');
+        break;
+    }
+
+    default: {
+        printByLetter('command not recognized...');
+    }
     }
 }
 
@@ -273,7 +272,11 @@ function UpdateCrocStatus() {
 //------------------------------------------------------------------ AJAX METHODS --------------------------------------"
 
 const saveGameState = () => {
-    let gameState = { username: username, world: world, player: player1 };
+    let gameState = {
+        username: username,
+        world: world,
+        player: player1
+    };
     console.log(gameState);
     $.ajax({
         type: "POST",
@@ -291,7 +294,9 @@ function getWorld() {
         type: "POST",
         url: "http://localhost:3000/getWorld",
         dataType: "json",
-        data: { username: username }
+        data: {
+            username: username
+        }
     }).done(function (data) {
         console.log(data);
         if (data === "userNotInDB") {
@@ -305,4 +310,3 @@ function getWorld() {
         }
     });
 }
-

@@ -182,6 +182,8 @@ function GameLoop(userInput, status) {
             break;
 
         case 'DROP ITEM': {
+            player1.removeItem();
+
         }
             break;
 
@@ -195,6 +197,14 @@ function GameLoop(userInput, status) {
 
         }
             break;
+
+            case 'EQUIP' : {
+                player1.equipWeapon();
+            }
+
+            case 'EAT' : {
+                player1.eat();
+            }
 
 
         case 'GOTO': {
