@@ -249,7 +249,7 @@ function playerRefreshStats() {
     items.innerHTML = `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
     inventory.innerHTML = '';
     for (let index = 0; index < player1.inventory.length; index++) {
-        inventory.innerHTML += `Item ${index}: ${player1.inventory[index].name}, ${player1.inventory[index].damage} dmg. </br>`
+        inventory.innerHTML += `${index}: ${player1.inventory[index].name}, ${player1.inventory[index].damage} dmg. </br>`
     }
 }
 
