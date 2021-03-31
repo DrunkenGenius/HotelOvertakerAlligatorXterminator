@@ -2,8 +2,6 @@ let username = prompt("What is your name human?");
 let world = new worldCreatorClass();
 let player1 = new playerClass;
 getWorld();
-let wep1 = new weaponClass;
-player1.addItem(wep1);
 
 let isFighting = false;
 //___________________________________________
@@ -78,6 +76,12 @@ window.addEventListener('load', function () {
     items.innerHTML =
         `Weapon Equipped: ${player1.weapon.name} </br> 
     Weapon Damage: ${player1.weapon.damage}`;
+
+    const inventory = document.getElementById('playerInventory')
+    for (let index = 0; index < player1.inventory.length; index++) {
+    inventory.innerHTML += 
+        `Item ${index + 1}: ${player1.inventory[index].name} </br>`
+    }
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
