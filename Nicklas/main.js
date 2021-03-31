@@ -66,18 +66,17 @@ const getRoom = (roomInput) => {
 const findIndexByName = (string, array) => {
     let index = array.findIndex(element => element.name.toUpperCase() === string.toUpperCase());
     return index;
-
 }
+
+
 
 window.addEventListener('load', function () {
 
     const status = document.getElementById('playerStats');
-    status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp}/1 `;
+    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
 
     const items = document.getElementById('playerItems')
-    items.innerHTML = 
-    `Weapon Equipped: ${player1.weapon.name} </br> 
-    Weapon Damage: ${player1.weapon.damage}`;
+    items.innerHTML = `Player Weapon Equipped: ${player1.weapon.name}`;
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
@@ -136,15 +135,12 @@ window.addEventListener('load', function () {
                         alert('YOU LOST');
                     }
                     else if (enemy.hp <= 0) {
-                        console.log("You won");
                         printByLetter(`${enemy.name} was defeated`);
-                        player1.xp += 10;
+                        player1.setexperience(enemy.xp);
+                        player1.setXPreq(100);
+                        status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
                     }
-
-
                 }
-
-
             }
                 break;
 
@@ -187,25 +183,20 @@ window.addEventListener('load', function () {
 
 function ShowCrocs() {
     if (world.rooms[player1.location].enemies.length >= 1) {
-        
         const croc1 = document.getElementById('croc1');
         croc1.innerHTML =
-            `HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
-    Level: ${world.rooms[player1.location].enemies[0].level} </br>
-    Damage: ${world.rooms[player1.location].enemies[0].damage} </br>`;
-
-        const crocName = document.getElementById("container0");
-        crocName.innerHTML = `${world.rooms[player1.location].enemies[0].name}`;
+            `Croc Name: ${world.rooms[player1.location].enemies[0].name} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[0].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[0].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[0].damage} </br>`;
     }
 
     if (world.rooms[player1.location].enemies.length === 2) {
         const croc2 = document.getElementById('croc2');
         croc2.innerHTML =
-            `HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
-    Level: ${world.rooms[player1.location].enemies[1].level} </br>
-    Damage: ${world.rooms[player1.location].enemies[1].damage} </br>`;
-
-    const crocName = document.getElementById("container3");
-        crocName.innerHTML = `${world.rooms[player1.location].enemies[1].name}`;
+            `Croc Name: ${world.rooms[player1.location].enemies[1].name} </br> 
+    Croc HP: ${world.rooms[player1.location].enemies[1].hp} </br> 
+    Croc Level: ${world.rooms[player1.location].enemies[1].level} </br>
+    Croc Damage: ${world.rooms[player1.location].enemies[1].damage} </br>`;
     }
 }

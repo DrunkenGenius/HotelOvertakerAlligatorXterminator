@@ -9,6 +9,7 @@ class playerClass {
         this.inventory = [];
         this.location = 0;
         this.damage = this.damage;
+        this.levelreq = 10;
 
     }
 
@@ -16,8 +17,6 @@ class playerClass {
         let wepdmg = this.weapon.damage;
         return wepdmg;
     }
- 
-
 
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
@@ -38,12 +37,21 @@ class playerClass {
         return playerName;
     }
 
+    setXPreq(req){
+        this.levelreq += req;
+    }
+
     setexperience(exp){
         this.xp += exp;
+        if (this.xp >  this.levelreq){
+            this.setlevel(1);
+            this.xp = 0;
+        }
+        
     }
     
     setlevel(lvl){
-        thislevel += lvl
+        this.level += lvl;
     }
 
     inventory(){
