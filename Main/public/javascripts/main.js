@@ -99,14 +99,14 @@ function GameLoop(userInput, status) {
             let lasRoomIndex = (player1.location + 2) % 3;
 
             //Hvad rummet hedder og hvilke rum der er i det
-            let searchString = `You look around in ${world.rooms[curRoomIndex].name}... The room connects to two other rooms in the Hotel: | 
+            let searchString = `You look around in ${world.rooms[curRoomIndex].name}... The room connects to two other areas in the Hotel: | 
                     ${nextRoomIndex}: ${world.rooms[nextRoomIndex].name} |
                     ${lasRoomIndex}: ${world.rooms[lasRoomIndex].name}   |`;
             //Hvis der er enemies i rummed tilføjes de til stringen
             if (world.rooms[curRoomIndex].enemies.length > 0) {
                 searchString += `Scary foes lurks in the room: | `;
                 world.rooms[curRoomIndex].enemies.forEach((enemy, index) => {
-                    searchString += `${index}: ${enemy.name}.. a level ${enemy.level} alligator |`;
+                    searchString += `${index}: ${enemy.name}.. a level ${enemy.level} enemy |`;
                 });
             }
             searchString += `What do you want to do... ?`;
@@ -133,7 +133,7 @@ function GameLoop(userInput, status) {
                 console.log('Enemy HP: ' + enemy.hp);
 
                 if (player1.hp <= 0) {
-                    alert('YOU LOST');
+                    printByLetter(`${player1.name} and his loyal weapon | ${player1.weapon.name} | didn't stand a chance and was defeated. You died.`)
                 } else if (enemy.hp <= 0) {
                     let defeatString = `${enemy.name} was defeated. Check for loot? |`;
 
