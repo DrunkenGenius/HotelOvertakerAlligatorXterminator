@@ -149,7 +149,6 @@ function GameLoop(userInput, status) {
                 printByLetter(defeatString);
                 player1.setexperience(enemy.xp);
                 player1.setXPreq();
-                playerRefreshStats();
                 let enemyIndex = findIndexByName(enemy.name, world.rooms[player1.location].enemies);
 
                 console.log(world.rooms[player1.location].loot)
@@ -175,9 +174,9 @@ function GameLoop(userInput, status) {
     }
     break;
 
-    case 'DROP ITEM': {
-        player1.removeItem();
-
+    case 'DROP': {
+        let weaponIndex = findInArrayByInput(variable, player1.inventory, false, "this weapon has not been found. Write it's name or number");
+        player1.removeItem(weaponIndex);
     }
     break;
 
@@ -195,8 +194,8 @@ function GameLoop(userInput, status) {
     break;
 
     case 'EQUIP': {
-        player1.equipWeapon(variable);
-        playerRefreshStats();
+        let weaponIndex = findInArrayByInput(variable, player1.inventory, false, "this weapon has not been found. Write it's name or number");
+        player1.equipWeapon(weaponIndex);
     }
 
     break;
@@ -205,7 +204,6 @@ function GameLoop(userInput, status) {
         if (player1.food > 0) {
             player1.eat();
             printByLetter('You eat and gain 10 HP');
-            playerRefreshStats();
         } else
             printByLetter('You have no more food.');
 
@@ -234,7 +232,9 @@ function GameLoop(userInput, status) {
     }
 
     }
+    playerRefreshStats();
 }
+
 
     function playerRefreshStats() {
         //-------------------------------
