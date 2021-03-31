@@ -56,10 +56,10 @@ class playerClass {
         this.hp += 20;
     }
 
-   
+
     addItem(theItem) {
-        if (theItem == 'Food'){
-            player1.food += theItem;
+        if (theItem.name == 'Food') {
+            player1.food += theItem.food;
         }
         this.inventory.push(theItem);
     }
@@ -68,16 +68,16 @@ class playerClass {
         this.inventory.splice(theItem, 1);
     }
 
-    equipWeapon(index){
+    equipWeapon(index) {
         this.inventory.push(this.weapon);
         this.weapon = this.inventory[index];
-        this.inventory.splice(index,1);
+        this.inventory.splice(index, 1);
     }
 
-    eat(){
+    eat() {
         this.hp += 10;
         this.food -= 1;
     }
-    
+
 
 }
