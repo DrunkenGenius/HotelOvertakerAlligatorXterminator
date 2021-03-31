@@ -200,15 +200,21 @@ function GameLoop(userInput, status) {
                 printByLetter(` You fled from a weird inhuman sound, it was your own fart. | Shame on you.`);
 
         }
+
+        
             break;
 
             case 'EQUIP' : {
                 player1.equipWeapon();
             }
 
+            break;
+
             case 'EAT' : {
                 player1.eat();
             }
+
+            break;
 
 
         case 'GOTO': {

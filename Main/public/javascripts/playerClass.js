@@ -10,6 +10,7 @@ class playerClass {
         this.location = 0;
         this.damage = this.weapon.damage;
         this.levelreq = 10;
+        this.food = 5:
 
     }
 
