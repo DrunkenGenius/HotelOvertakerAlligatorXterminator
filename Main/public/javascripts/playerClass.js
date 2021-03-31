@@ -56,11 +56,7 @@ class playerClass {
         this.hp += 20;
     }
 
-    inventory() {
-        let items;
-        return items;
-    }
-
+   
     addItem(theItem) {
         if (theItem == 'Food'){
             player1.food += theItem;
@@ -74,7 +70,8 @@ class playerClass {
 
     equipWeapon(index){
         this.inventory.push(this.weapon);
-        this.weapon = this.inventory(index);
+        this.weapon = this.inventory[index];
+        this.inventory.splice(index,1);
     }
 
     eat(){

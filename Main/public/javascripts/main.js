@@ -4,6 +4,10 @@ let player1 = new playerClass;
 getWorld();
 let wep1 = new weaponClass;
 player1.addItem(wep1);
+let wep2 = new weaponClass;
+player1.addItem(wep2);
+let wep3 = new weaponClass;
+player1.addItem(wep3);
 
 let isFighting = false;
 //___________________________________________
@@ -191,7 +195,7 @@ function GameLoop(userInput, status) {
     break;
 
     case 'EQUIP': {
-        player1.equipWeapon(0);
+        player1.equipWeapon(variable);
         playerRefreshStats();
     }
 
@@ -244,7 +248,7 @@ function GameLoop(userInput, status) {
         items.innerHTML = `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
         inventory.innerHTML = '';
         for (let index = 0; index < player1.inventory.length; index++) {
-            inventory.innerHTML = `Item ${index}: ${player1.inventory[index].name} </br>`
+            inventory.innerHTML += `Item ${index}: ${player1.inventory[index].name}, ${player1.inventory[index].damage} dmg. </br>`
         }
     }
 
