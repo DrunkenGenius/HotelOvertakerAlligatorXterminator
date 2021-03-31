@@ -33,8 +33,8 @@ class playerClass {
         return playerName;
     }
 
-    setXPreq(req) {
-        this.levelreq += req;
+    setXPreq() {
+        this.levelreq = this.level * 100;
     }
 
     setexperience(exp) {
@@ -72,9 +72,9 @@ class playerClass {
         this.inventory.splice(theItem, 1);
     }
 
-    equipWeapon(lootIndex){
+    equipWeapon(index){
         this.inventory.push(this.weapon);
-        this.weapon = this.inventory.splice(lootIndex, 1);
+        this.weapon = this.inventory(index);
     }
 
     eat(){
