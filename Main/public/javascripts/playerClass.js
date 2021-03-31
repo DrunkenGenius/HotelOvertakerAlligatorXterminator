@@ -78,8 +78,10 @@ class playerClass {
     }
 
     eat(){
+        if (this.food > 0){
         this.hp += 10;
         this.food -= 1;
+    }
     }
 
 }
