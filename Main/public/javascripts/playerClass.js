@@ -65,7 +65,7 @@ class playerClass {
     }
 
     removeItem(theItem) {
-        this.inventory.splice(theItem, 1);
+        return this.inventory.splice(theItem, 1);
     }
 
     equipWeapon(index) {

@@ -167,17 +167,23 @@ function GameLoop(userInput, status) {
             if (variable === undefined) {
                 printByLetter(`On the floor lies: ${JSON.stringify(world.rooms[player1.location].loot)}`)
             } else {
-                console.log(world.rooms[player1.location].loot[1].name);
-                lootIndex = findInArrayByInput(variable, world.rooms[player1.location].loot, true, "this item has not been found. Write it's name or number");
+                lootIndex = findInArrayByInput(variable, world.rooms[player1.location].loot, false, "this item has not been found. Write it's name or number");
+                console.log("lootindex: " + lootIndex);
                 loot = findInArrayByInput(variable, world.rooms[player1.location].loot, true, "this item has not been found. Write it's name or number");
                 player1.addItem(loot);
+                //Når et item er lootet splicer vi det ud af world.rooms.loot arrayet
+                world.rooms[player1.location].loot.splice(lootIndex, 1);
+                printByLetter(`You looted ${loot.name}`);
             }
         }
             break;
 
         case 'DROP': {
             let weaponIndex = findInArrayByInput(variable, player1.inventory, false, "this weapon has not been found. Write it's name or number");
-            player1.removeItem(weaponIndex);
+            let droppedWeapon = player1.removeItem(weaponIndex);
+            console.log(droppedWeapon);
+            world.rooms[player1.location].loot.push(droppedWeapon);
+            printByLetter(`You dropped ${droppedWeapon.name} in the room`);
         }
             break;
 
