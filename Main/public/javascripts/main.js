@@ -57,20 +57,8 @@ const findIndexByName = (string, array) => {
 }
 
 window.addEventListener('load', function () {
-
-    const status = document.getElementById('playerStats');
-    status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq}  ;`
-
-    const items = document.getElementById('playerItems')
-    items.innerHTML =
-        `Weapon Equipped: ${player1.weapon.name} </br> 
-    Weapon Damage: ${player1.weapon.damage}`;
-
-    const inventory = document.getElementById('playerInventory')
-    for (let index = 0; index < player1.inventory.length; index++) {
-    inventory.innerHTML += 
-        `Item ${index + 1}: ${player1.inventory[index].name} </br>`
-    }
+    playerRefreshStats();
+    
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
@@ -87,12 +75,14 @@ window.addEventListener('load', function () {
             GameLoop(userInput, status);
         }
     }
+
+
+    
 });
 
 
 function GameLoop(userInput, status) {
     const gamePlay = document.getElementById('gamePlay');
-    gamePlay.innerHTML = `You try to ${userInput.value}: `;
 
     //Split input string
     let input = userInput.value.split(' ');
@@ -159,7 +149,7 @@ function GameLoop(userInput, status) {
                     printByLetter(defeatString);
                     player1.setexperience(enemy.xp);
                     player1.setXPreq(100);
-                    status.innerHTML = `Player hp: ${player1.hp} </br> Level: ${player1.level} </br> xp: ${player1.xp} / ${player1.levelreq} `;
+                    playerRefreshStats();
                     let enemyIndex = findIndexByName(enemy.name, world.rooms[player1.location].enemies);
 
                     console.log(world.rooms[player1.location].loot)
@@ -206,12 +196,20 @@ function GameLoop(userInput, status) {
 
             case 'EQUIP' : {
                 player1.equipWeapon();
+                playerRefreshStats()
             }
 
             break;
 
             case 'EAT' : {
+                if (player1.food > 0 ){
                 player1.eat();
+                printByLetter('You eat and gain 10 HP');
+                playerRefreshStats();
+                }
+                else
+                printByLetter('You have no more food.')
+                
             }
 
             break;
@@ -234,6 +232,21 @@ function GameLoop(userInput, status) {
             printByLetter('command not recognized...');
         }
     }
+}
+
+function playerRefreshStats() {
+    //-------------------------------
+    const status = document.getElementById('playerStats');
+    const items = document.getElementById('playerItems');
+    const inventory = document.getElementById('playerInventory');
+    
+    ///--------------------------------
+
+    status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> XP: ${player1.xp} / ${player1.levelreq} </br> Food: ${player1.food} `;
+    items.innerHTML =  `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
+    inventory.innerHTML = '';
+    for (let index = 0; index < player1.inventory.length; index++) {
+        inventory.innerHTML += `Item ${index}: ${player1.inventory[index].name} </br>` }
 }
 
 function UpdateCrocStatus() {
