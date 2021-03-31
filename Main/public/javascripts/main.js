@@ -99,14 +99,14 @@ function GameLoop(userInput, status) {
             let lasRoomIndex = (player1.location + 2) % 3;
 
             //Hvad rummet hedder og hvilke rum der er i det
-            let searchString = `You look around in ${world.rooms[curRoomIndex].name}... The room connects to two other rooms in the Hotel: | 
+            let searchString = `You look around in ${world.rooms[curRoomIndex].name}... The room connects to two other areas in the Hotel: | 
                     ${nextRoomIndex}: ${world.rooms[nextRoomIndex].name} |
                     ${lasRoomIndex}: ${world.rooms[lasRoomIndex].name}   |`;
             //Hvis der er enemies i rummed tilføjes de til stringen
             if (world.rooms[curRoomIndex].enemies.length > 0) {
                 searchString += `Scary foes lurks in the room: | `;
                 world.rooms[curRoomIndex].enemies.forEach((enemy, index) => {
-                    searchString += `${index}: ${enemy.name}.. a level ${enemy.level} alligator |`;
+                    searchString += `${index}: ${enemy.name}.. a level ${enemy.level} enemy |`;
                 });
             }
             searchString += `What do you want to do... ?`;
@@ -133,7 +133,7 @@ function GameLoop(userInput, status) {
                 console.log('Enemy HP: ' + enemy.hp);
 
                 if (player1.hp <= 0) {
-                    alert('YOU LOST');
+                    printByLetter(`${player1.name} and his loyal weapon | ${player1.weapon.name} | didn't stand a chance and was defeated. You died.`)
                 } else if (enemy.hp <= 0) {
                     let defeatString = `${enemy.name} was defeated. Check for loot? |`;
 
@@ -167,17 +167,23 @@ function GameLoop(userInput, status) {
             if (variable === undefined) {
                 printByLetter(`On the floor lies: ${JSON.stringify(world.rooms[player1.location].loot)}`)
             } else {
-                console.log(world.rooms[player1.location].loot[1].name);
-                lootIndex = findInArrayByInput(variable, world.rooms[player1.location].loot, true, "this item has not been found. Write it's name or number");
+                lootIndex = findInArrayByInput(variable, world.rooms[player1.location].loot, false, "this item has not been found. Write it's name or number");
+                console.log("lootindex: " + lootIndex);
                 loot = findInArrayByInput(variable, world.rooms[player1.location].loot, true, "this item has not been found. Write it's name or number");
                 player1.addItem(loot);
+                //Når et item er lootet splicer vi det ud af world.rooms.loot arrayet
+                world.rooms[player1.location].loot.splice(lootIndex, 1);
+                printByLetter(`You looted ${loot.name}`);
             }
         }
             break;
 
         case 'DROP': {
             let weaponIndex = findInArrayByInput(variable, player1.inventory, false, "this weapon has not been found. Write it's name or number");
-            player1.removeItem(weaponIndex);
+            let droppedWeapon = player1.removeItem(weaponIndex);
+            console.log(droppedWeapon);
+            world.rooms[player1.location].loot.push(droppedWeapon);
+            printByLetter(`You dropped ${droppedWeapon.name} in the room`);
         }
             break;
 
