@@ -195,16 +195,11 @@ function GameLoop(userInput, status) {
                 printByLetter(` You fled from a weird inhuman sound, it was your own fart. | Shame on you.`);
 
         }
-
-
-
             break;
 
         case 'EQUIP': {
             let weaponIndex = findInArrayByInput(variable, player1.inventory, false, "this weapon has not been found. Write it's name or number");
             player1.equipWeapon(weaponIndex);
-            const sword = new Audio('sounds/471147__worldmaxter__sword-slide');
-            tom1.play();
         }
 
             break;
