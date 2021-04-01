@@ -70,6 +70,7 @@ window.addEventListener('load', function () {
 
     enterBtn.addEventListener('click', function () {
         GameLoop(userInput, status);
+        
     });
 
     $(window).keydown(function (event) {
