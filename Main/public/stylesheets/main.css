@@ -162,11 +162,13 @@ form button {
     grid-area: player;
 }
 
+#container5{
+    grid-area: enemyAction;
+}
+
 #container11{
     grid-area: item;
 }
-
-
 
 .textColor{
     color: yellow;
@@ -239,6 +241,20 @@ form button {
     padding-top: 2%;
     font-size: 20px; 
 }
+
+#enemyAction{
+    display: inline-block; 
+    text-align: left;
+    padding-top: 2%;
+    font-size: 20px; 
+}
+
+#enemyActionsHeading{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 1%; 
+}
+
 
 #gamePlay{
     display: inline-block; 
