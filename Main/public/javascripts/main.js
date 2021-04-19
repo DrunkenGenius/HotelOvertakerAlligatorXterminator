@@ -188,7 +188,7 @@ function GameLoop(userInput, status) {
         }
             break;
 
-        case 'FLEE': {
+        case 'FLEE': { //currently not functioning. Must slow down attack loop. 
             if (isFighting == true) {
                 isFighting = false;
                 printByLetter(` You fled from the enemy, prideless and weak`);
