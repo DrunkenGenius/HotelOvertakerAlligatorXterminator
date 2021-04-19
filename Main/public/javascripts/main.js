@@ -91,6 +91,9 @@ function GameLoop(userInput, status) {
     let command = input[0];
     let variable = userInput.value.split(command + " ")[1];
 
+    const enemyActions = document.getElementById('enemyAction');
+    enemyActions.innerHTML = `The other player just: ${userInput.value}`
+
     switch (command.toUpperCase()) {
         case 'SEARCH': {
             gamePlay.innerHTML = "";
@@ -248,7 +251,6 @@ function playerRefreshStats() {
     const inventory = document.getElementById('playerInventory');
 
     ///--------------------------------
-
     status.innerHTML = `HP: ${player1.hp} </br> Level: ${player1.level} </br> XP: ${player1.xp} / ${player1.levelreq} </br> Food: ${player1.food} `;
     items.innerHTML = `Weapon: ${player1.weapon.name} </br> Damage: ${player1.weapon.damage}`;
     inventory.innerHTML = '';
