@@ -42,7 +42,6 @@ router.post('/getWorld', function (req, res, next) {
 	} else {
 		res.send(JSON.stringify(myData[userIndex]));
 	}
-
 });
 
 router.get('/highscores', function (req, res, next) {

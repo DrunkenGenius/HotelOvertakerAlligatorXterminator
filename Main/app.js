@@ -11,8 +11,9 @@ const fs = require('fs');
 
 const app = express();
 
-
-
+//Setting up socket.io with express app generator --- https://onedesigncompany.com/news/express-generator-and-socket-io
+const server = require('http').Server(app);  
+const io = require('socket.io')(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+server.listen(3000, "192.168.1.19");
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -44,4 +45,11 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+io.on('connection', function(client) {
+  console.log('Client connected...');
+  client.on('UpdateWorld', function(data) {
+    client.emit('UpdateWorld', data);
+  });
+});
+
+module.exports = {app: app, server: server};

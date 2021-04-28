@@ -1,7 +1,13 @@
+//Get Username
 let username = prompt("What is your name human?");
+//Create world and player
 let world = new worldCreatorClass();
 let player1 = new playerClass;
+//Check if user already has world in DB
 getWorld();
+//Connect to socket
+const socket = io.connect('localhost:3000/');
+//Give player weapons
 let wep1 = new weaponClass;
 player1.addItem(wep1);
 let wep2 = new weaponClass;
@@ -61,16 +67,25 @@ const findIndexByName = (string, array) => {
 
 }
 
+socket.on('UpdateWorld', function(data) {
+    player2Console.innerHTML = data.message;
+    world = data.world;
+    console.log(data);
+});
+
 window.addEventListener('load', function () {
     playerRefreshStats();
 
-
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
+    
+
+    socket.on('connect', function (data) {
+        console.log("Socket connected succesfully");
+    });
 
     enterBtn.addEventListener('click', function () {
         GameLoop(userInput, status);
-        
     });
 
     $(window).keydown(function (event) {
@@ -154,6 +169,7 @@ function GameLoop(userInput, status) {
                     //console.log(world.rooms[player1.location].loot)
                     world.rooms[player1.location].enemies.splice(enemyIndex, 1);
                     UpdateCrocStatus();
+                    playerRefreshStats(`${username} has killed ${enemy}`)
                 }
 
 
@@ -226,7 +242,9 @@ function GameLoop(userInput, status) {
             break;
 
         case 'SAVEGAME': {
-            saveGameState();
+            
+            
+            
             printByLetter('Saving game. . . Success');
 
         }
@@ -241,7 +259,13 @@ function GameLoop(userInput, status) {
 }
 
 
-function playerRefreshStats() {
+function playerRefreshStats(message) {
+    //Update world using socket
+    //Sends Gamestate to server which should emit the data to the other player aswell as save to DB
+    //We should send a message to the other player about action taken
+    socket.emit('UpdateWorld', {username, world, message});
+
+
     //-------------------------------
     const status = document.getElementById('playerStats');
     const items = document.getElementById('playerItems');
