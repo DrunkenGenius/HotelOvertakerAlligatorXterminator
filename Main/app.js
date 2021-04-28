@@ -44,11 +44,13 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-io.on('connection', function(client) {
+const users = [];
+io.on('connection', function(socket) {
   console.log('Client connected...');
-  client.on('UpdateWorld', function(data) {
-    client.emit('UpdateWorld', data);
+  socket.on('UpdateWorld', function(data) {
+    //client.emit('UpdateWorld', data);
+    socket.broadcast.emit('UpdateWorld', data);
+    console.log(JSON.parse(data).message);
   });
 });
 
