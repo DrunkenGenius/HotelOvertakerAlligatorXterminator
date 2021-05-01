@@ -1,108 +1,138 @@
-//Get Username
-let username = prompt("What is your name human?");
+//Username
+let username = "";
+//Active users is set in Login and disconnect
+let activeUsers = [];
 //Create world and player
-let world = new worldCreatorClass();
-console.log(world);
-let player1 = new playerClass;
-//Check if user already has world in DB
-getWorld();
+let world =new worldCreatorClass(); 
+let player1 = new playerClass; 
 //Connect to socket
 const socket = io.connect('localhost:3000/');
-//Give player weapons
-let wep1 = new weaponClass;
-player1.addItem(wep1);
-let wep2 = new weaponClass;
-player1.addItem(wep2);
-let wep3 = new weaponClass;
-player1.addItem(wep3);
 
 let isFighting = false;
 //___________________________________________
-let interval;
+let printInterval;
 
-function printByLetter(message) {
-    clearInterval(interval);
-    let gamePlay = document.getElementById('gamePlay');
-    gamePlay.innerHTML = '';
-    let i = 0;
-    interval = setInterval(function () {
-        if (message.charAt(i) === "|")
-            gamePlay.innerHTML += '<br/>'
-        else
-            gamePlay.innerHTML += message.charAt(i);
-        i++;
-        if (i > message.length) {
-            clearInterval(interval);
-        }
-    }, 50);
-}
+//Jeg laver en switch for at tjekke hvor vi er i programmet
+// Login, ChooseRoom og Gameloop
+let functionEnum = "Login";
 
-const findInArrayByInput = (input, searchArray, returnAsObject, promptString) => {
-    let index = parseInt(input);
-    if (isNaN(index)) {
-        index = findIndexByName(input, searchArray);
-        console.log(index);
-        while (searchArray[index] === undefined) {
-            reply = prompt(promptString);
-            if (isNaN(parseInt(reply))) {
-                index = findIndexByName(reply, searchArray);
-            } else {
-                index = parseInt(reply);
-            }
-        }
-        if (returnAsObject)
-            return searchArray[index];
-        else
-            return index
-    } else {
-        if (returnAsObject)
-            return searchArray[index];
-        else
-            return index
-    }
-}
-
-const findIndexByName = (string, array) => {
-    let index = array.findIndex(element => element.name.toUpperCase() === string.toUpperCase());
-    return index;
-
-}
-
-socket.on('UpdateWorld', function(data) {
+socket.on('UpdateWorld', function (data) {
     //player2Console.innerHTML = data.message;
     const enemyActions = document.getElementById('enemyAction');
-    
     console.log(data);
-    gameState = JSON.parse(data);
-    world = gameState.world;
-    enemyActions.innerHTML = `${gameState.message}`;
-    player1 = gameState.player;
+    world = data.world.world;
+    enemyActions.innerHTML = `${data.message}`;
+    player1 = data.world.player1;
+    playerRefreshStats("UpdateOwnInfoWhenReceivingData");
     console.log(world);
 });
 
 window.addEventListener('load', function () {
-    playerRefreshStats(`${username} joined the game`);
+    //playerRefreshStats(`${username} joined the game`);
+    printByLetter("Write your username");
 
     const enterBtn = document.getElementById('enterBtn');
     const userInput = document.getElementById('userInput');
-    
+
 
     socket.on('connect', function (data) {
+        //Emit username to server
         console.log("Socket connected succesfully");
     });
 
     enterBtn.addEventListener('click', function () {
-        GameLoop(userInput, status);
+        switch (functionEnum) {
+            case "Login":
+                Login(userInput);
+                break;
+            case "ChooseRoom":
+                ChooseRoom(userInput);
+                break;
+            case "GameLoop":
+                GameLoop(userInput, status);
+                break;
+        }
+
     });
 
     $(window).keydown(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
-            GameLoop(userInput, status);
+            switch (functionEnum) {
+                case "Login":
+                    Login(userInput);
+                    break;
+                case "ChooseRoom":
+                    ChooseRoom(userInput);
+                    break;
+                case "GameLoop":
+                    GameLoop(userInput, status);
+                    break;
+            }
             return false;
         }
     });
 });
+
+const createWorld = () => {
+    world = new worldCreatorClass();
+    player1 = new playerClass;
+}
+
+function Login(userInput) {
+    //Split input string
+    let input = userInput.value.split(' ');
+    if (input.length > 1) {
+        printByLetter("Username can not have spaces, try again");
+    } else if (input.length === 1) {
+        username = userInput.value;
+        functionEnum = "ChooseRoom";
+        socket.emit("Login", username);
+    }
+}
+
+socket.on("Login", data=>{
+    activeUsers = data;
+    if(functionEnum =="ChooseRoom"){    
+        let string = "Which user do you want to join?|";
+        data.forEach(user => string+= user.username +"|");
+        printByLetter(string);
+    }
+});
+
+function ChooseRoom(userInput) {
+    let input = userInput.value.split(' ');
+    if (input.length > 1) {
+        printByLetter("Username can not have spaces, try again");
+        console.log("inputLegth > 1");
+    } else if (input.length === 1) {
+        console.log("inputLegth === 1");
+        let userFound = activeUsers.filter(user => user.username === userInput.value);
+        console.log(userFound);
+        if(userFound.length !== 0){
+            console.log("userfound");
+            printByLetter(`Hello ${username}.. Welcome to Hotel Overtaker Alligator Xterminator!!!`)
+            let gameState = {
+                username: username,
+                world: { world, player1 },
+                playerToJoin: userInput.value
+            }
+            socket.emit("ChooseRoom", gameState);
+            functionEnum = "GameLoop";
+        }else{
+            console.log("user not active");
+            let string = "Username doesn't have an active game, try again.. Which user do you want to join?|";
+            activeUsers.forEach(user => string+= user.username +"|");
+            printByLetter(string);
+        }     
+    }
+}
+
+socket.on("ChooseRoom", data => {
+    world = data.world.world;
+    player1 = data.world.player1;
+    
+})
 
 
 function GameLoop(userInput, status) {
@@ -114,7 +144,7 @@ function GameLoop(userInput, status) {
     let variable = userInput.value.split(command + " ")[1];
 
     const enemyActions = document.getElementById('enemyAction');
-    
+
 
     switch (command.toUpperCase()) {
         case 'SEARCH': {
@@ -217,7 +247,7 @@ function GameLoop(userInput, status) {
             console.log(droppedWeapon);
             world.rooms[player1.location].loot.push(droppedWeapon);
             printByLetter(`You dropped ${droppedWeapon.name} in the room`);
-            playerRefreshStats(`${username} looted ${droppedWeapon.name} in ${world.rooms[player1.location].name}` );
+            playerRefreshStats(`${username} looted ${droppedWeapon.name} in ${world.rooms[player1.location].name}`);
         }
             break;
 
@@ -246,7 +276,7 @@ function GameLoop(userInput, status) {
         case 'EAT': {
             if (player1.food > 0) {
                 player1.hp += 10;
-                playerRefreshStats(`${username} eats and gains 10 hp` );
+                playerRefreshStats(`${username} eats and gains 10 hp`);
                 printByLetter('You eat and gain 10 HP');
             } else
                 printByLetter('You have no more food.');
@@ -266,9 +296,9 @@ function GameLoop(userInput, status) {
             break;
 
         case 'SAVEGAME': {
-            
-            
-            
+
+
+
             printByLetter('Saving game. . . Success');
 
         }
@@ -279,7 +309,7 @@ function GameLoop(userInput, status) {
         }
 
     }
-    
+
 }
 
 
@@ -287,17 +317,18 @@ function playerRefreshStats(message) {
     //Update world using socket
     //Sends Gamestate to server which should emit the data to the other player aswell as save to DB
     //We should send a message to the other player about action taken
-    let gameState = JSON.stringify(
-        {
+    //Hvis vi bare skal opdatere uden at emit vores verden -- Når vi får data fra den anden spiller
+    if (message !== "UpdateOwnInfoWhenReceivingData") {
+        let gameState = {
             username: username,
-            world: world,
-            player: player1,
+            world: { world, player1 },
             message
         }
-    )
+        
+        socket.emit('UpdateWorld', gameState);
+    }
 
     
-    socket.emit('UpdateWorld', gameState);
 
     //-------------------------------
     const status = document.getElementById('playerStats');
@@ -361,45 +392,50 @@ function UpdateCrocStatus() {
     }
 }
 
-
-//------------------------------------------------------------------ AJAX METHODS --------------------------------------"
-
-const saveGameState = () => {
-    let gameState = {
-        username: username,
-        world: world,
-        player: player1
-    };
-    console.log(gameState);
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/saveGameState",
-        dataType: "json",
-        data: gameState
-    }).done(function (data) {
-        console.log("SavedState: " + data)
-    });
-
+function printByLetter(message) {
+    clearInterval(printInterval);
+    let gamePlay = document.getElementById('gamePlay');
+    gamePlay.innerHTML = '';
+    let i = 0;
+    printInterval = setInterval(function () {
+        if (message.charAt(i) === "|")
+            gamePlay.innerHTML += '<br/>'
+        else
+            gamePlay.innerHTML += message.charAt(i);
+        i++;
+        if (i > message.length) {
+            clearInterval(printInterval);
+        }
+    }, 50);
 }
 
-function getWorld() {
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/getWorld",
-        dataType: "json",
-        data: {
-            username: username
+const findInArrayByInput = (input, searchArray, returnAsObject, promptString) => {
+    let index = parseInt(input);
+    if (isNaN(index)) {
+        index = findIndexByName(input, searchArray);
+        console.log(index);
+        while (searchArray[index] === undefined) {
+            reply = prompt(promptString);
+            if (isNaN(parseInt(reply))) {
+                index = findIndexByName(reply, searchArray);
+            } else {
+                index = parseInt(reply);
+            }
         }
-    }).done(function (data) {
-        console.log(data);
-        if (data === "userNotInDB") {
-            console.log("userNotInDB use created world");
-            printByLetter(`No user was found under username: ${username}. Therefore, a new world has been created|You are:| Name: ${player1.name}|Level: ${player1.level}`);
-        } else {
-            world = data.world;
-            player1 = data.player;
-            printByLetter(`You have succesfully loaded as user: ${username}. | Name: ${player1.name}|Level: ${player1.level}`);
+        if (returnAsObject)
+            return searchArray[index];
+        else
+            return index
+    } else {
+        if (returnAsObject)
+            return searchArray[index];
+        else
+            return index
+    }
+}
 
-        }
-    });
+const findIndexByName = (string, array) => {
+    let index = array.findIndex(element => element.name.toUpperCase() === string.toUpperCase());
+    return index;
+
 }

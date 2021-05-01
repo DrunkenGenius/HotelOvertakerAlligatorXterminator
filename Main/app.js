@@ -12,8 +12,8 @@ const fs = require('fs');
 const app = express();
 
 //Setting up socket.io with express app generator --- https://onedesigncompany.com/news/express-generator-and-socket-io
-const server = require('http').Server(app);  
-const io = require('socket.io')(server);
+const server = require('http').Server(app);
+require('./sockets.js').initialize(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,15 +43,6 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-const users = [];
-io.on('connection', function(socket) {
-  console.log('Client connected...');
-  socket.on('UpdateWorld', function(data) {
-    //client.emit('UpdateWorld', data);
-    socket.broadcast.emit('UpdateWorld', data);
-    console.log(JSON.parse(data).message);
-  });
 });
 
 module.exports = {app: app, server: server};

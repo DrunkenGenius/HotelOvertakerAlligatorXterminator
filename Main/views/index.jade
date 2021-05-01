@@ -1,6 +1,22 @@
-extends layout
-
-block content
+doctype html
+html(lang='en')
+  head
+    title [H][O][A][X]
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='stylesheets/main.css')
+    script(src="https://cdn.socket.io/3.1.3/socket.io.min.js")
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src='javascripts/weaponClass.js')
+    script(src='javascripts/foodClass.js')
+    script(src='javascripts/playerClass.js')
+    script(src='javascripts/enemyClass.js')
+    script(src='javascripts/roomClass.js')
+    script(src='javascripts/worldCreatorClass.js')
+    script(src='javascripts/main.js')
+    title Document
+  body#body
     .container
       #headline
       #container0.textColor.CrocText
@@ -42,3 +58,13 @@ block content
         #playerInventoryHeading Player Inventory
         .centerText
           #playerInventory
+    section
+      button#btn LogIn
+      #ovrly
+      #login
+        button#cross ✗
+        h1 Log In!
+        form
+          input.txt(type='text' placeholder='enter your Email')
+          input.pswd(type='password' placeholder='enter your password')
+          input#btn(type='button' value='LogIn')

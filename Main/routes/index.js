@@ -19,7 +19,7 @@ fs.readFile('highscores.json', function (err, data) {
 /* GET home page.*/
 //Jade
 router.get('/', function (req, res, next) {
-	res.render('index', { title: 'Simple Game', data: myData[0].username });
+	res.render('index', { condition: "login" });
 });
 
 router.post('/highscores', function (req, res, next) {
